@@ -24,8 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ssafy.happyhouse.dto.ArticleDto;
 import com.ssafy.happyhouse.service.ArticleService;
 
-@Controller
-@RequestMapping("/article")
+@RestController
 @CrossOrigin("*")
 public class ArticleController {
 	private static final Logger logger = LoggerFactory.getLogger(ArticleController.class);
