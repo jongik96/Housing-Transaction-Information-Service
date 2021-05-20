@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.happyhouse.repo.MemberRepo">
+
+	<select id="login" parameterType="map" resultType="MemberDto">
+		select *
+		from ssafy_member
+		where userid = #{userid} and userpwd = #{userpwd}
+	</select>
+
+	<insert id="writeArticle" parameterType="MemberDto">
+		insert into ssafy_member
+		(userid, username, userpwd, email)
+		values (#{userid}, #{username},#{userpwd},#{email})
+	</insert>
+
+	<insert id="registerMember" parameterType="MemberDto">
+		insert into ssafy_member (userid, username, userpwd, email)
+		values (#{userid}, #{username}, #{userpwd}, #{email})
+	</insert>
+	
+	<update id="modifyMember" parameterType="MemberDto">
+		update ssafy_member
+		set username = #{username}, userpwd = #{userpwd}, email = #{email}
+		where userid = #{userid}
+	</update>
+	
+	<delete id="deleteMember" parameterType="String">
+	delete from ssafy_member
+	where userid = #{userid}
+	</delete>
+
+</mapper>

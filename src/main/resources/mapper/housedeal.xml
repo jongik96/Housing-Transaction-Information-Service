@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.happyhouse.repo.HouseDealRepo">
+	
+ 	<select id="getHouseDeal" parameterType="map" resultType="HouseDealDto">
+		select *
+		from housedeal h right outer join houseinfo i on h.aptname=i.aptname
+		where h.dong = #{dongcode} and i.dong= #{dongcode}
+		
+		
+	</select>
+
+	<select id="getAptDeal" parameterType="HouseDealDto" resultType="HouseDealDto">
+		select * 
+		from housedeal h left outer join houseinfo i on h.AptName=i.AptName 
+		where h.aptname like concat('%', #{aptName}, '%') limit 6
+	</select>
+	
+</mapper>
