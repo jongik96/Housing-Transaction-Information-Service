@@ -89,6 +89,7 @@ public class ArticleController {
 			e.printStackTrace();
 			return new ResponseEntity<String>(FAIL, HttpStatus.NO_CONTENT);
 		}
+		
 		// JSON으로 공지사항 리스트만 넘겨줄것.
 		// 원래는 이 메서드가 오류처리와 페이지 이동까지 해줬는데
 		// JSON만 넘겨서 vue에서 처리를 해줘야 한다.
