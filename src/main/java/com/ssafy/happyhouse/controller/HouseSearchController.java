@@ -3,6 +3,7 @@ package com.ssafy.happyhouse.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ssafy.happyhouse.dto.AddressDto;
 import com.ssafy.happyhouse.dto.HouseDealDto;
+import com.ssafy.happyhouse.dto.ParkDto;
 import com.ssafy.happyhouse.service.HouseDealService;
 
 @Controller
@@ -27,7 +29,6 @@ public class HouseSearchController {
 	@RequestMapping(value = "/aptSearch", method = RequestMethod.GET)
 	public String aptSearch(@RequestParam("aptname") String aptname, Model model) {
 		System.out.println(aptname);
-		
 		
 		try{
 			List<HouseDealDto> list = houseDealService.getAptDeal(aptname);
@@ -69,6 +70,15 @@ public class HouseSearchController {
 		    	 result = houseDealService.getHouseDeal(map.get("dong"));
 		    }
 		  return result;
+	}
+	
+	@RequestMapping(value = "")
+	public List<ParkDto> getParkInfo(@RequestParam Map<String,String> map, Model model, HttpServletRequest response){
+		List<ParkDto> result = null;
+		
+		
+		
+		return result;
 	}
 
 }

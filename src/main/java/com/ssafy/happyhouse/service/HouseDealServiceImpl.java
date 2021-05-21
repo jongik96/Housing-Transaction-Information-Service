@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ssafy.happyhouse.dto.HouseDealDto;
+import com.ssafy.happyhouse.dto.MarketDto;
+import com.ssafy.happyhouse.dto.ParkDto;
 import com.ssafy.happyhouse.repo.HouseDealRepo;
 
 @Service
@@ -28,6 +30,21 @@ public class HouseDealServiceImpl implements HouseDealService {
 	public List<HouseDealDto> getAptDeal(String apt) {
 		System.out.println(apt+"service들어옴");
 		return sqlSession.getMapper(HouseDealRepo.class).getAptDeal(apt);
+	}
+
+	@Override
+	public HouseDealDto getHouseInfo(int no) {
+		return sqlSession.getMapper(HouseDealRepo.class).getHouseInfo(no);
+	}
+
+	@Override
+	public List<ParkDto> getParkInfo(HouseDealDto house) {
+		return sqlSession.getMapper(HouseDealRepo.class).getParkInfo(house);
+	}
+
+	@Override
+	public List<MarketDto> getMarketInfo(HouseDealDto house) {
+		return sqlSession.getMapper(HouseDealRepo.class).getMarketInfo(house);
 	}
 
 }

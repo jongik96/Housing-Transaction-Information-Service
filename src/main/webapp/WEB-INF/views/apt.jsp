@@ -204,7 +204,7 @@ pageContext.setAttribute("root", root);
                         </c:if>
                         <tr>
                         <td>
-                       		 더이상의 검색 결과가 없습니다.
+                       		 더이상의 검색 결과가 없습니다!
                         </td>
                         </tr>
                     </tbody>
