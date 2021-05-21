@@ -46,5 +46,5 @@ public class HouseDealServiceImpl implements HouseDealService {
 	public List<MarketDto> getMarketInfo(HouseDealDto house) {
 		return sqlSession.getMapper(HouseDealRepo.class).getMarketInfo(house);
 	}
-
+	
 }
