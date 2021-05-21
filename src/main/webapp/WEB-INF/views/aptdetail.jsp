@@ -74,32 +74,39 @@
 		});
 		</script>
 <script>
-	var hlat = ${house.lat};
-	var hlng = ${house.lng};
-	
-   function initMap() {
-       var myLatLng = {  lat: hlat, lng: hlng };
-       const map = new google.maps.Map(document.getElementById("map"), {
-         zoom: 16,
-         center: myLatLng,
-       });
-       
-       new google.maps.Marker({
-    	    position: myLatLng,
-    	    map: map,
-    	    label: "${house.aptName}"
-    	  });
-       
-       for (var i = 0; i < 10; i++) {  
-   		var marker = new google.maps.Marker({
-   			map: map,
-   			position: new google.maps.LatLng(plist[i].lat, plist[i].lit),
-   			label: plist[i].parkname
-   		});
-   	}
-       
-     }
-   
+function initMap() {
+    var myLatLng = {  lat: 37.533582, lng: 126.976109};
+    const map = new google.maps.Map(document.getElementById("map"), {
+      zoom: 11,
+      center: myLatLng,
+    });
+    $.ajax({
+        url : '${root }/search/searchMarkerPark/${house.no}', //데이터베이스에 접근해 현재페이지로 결과를 뿌려줄 페이지
+        mathod : 'post',
+        data : {
+              "no": "${house.no}"  //0 아파트 1 동검색 
+        },
+        datatype:"json",
+        contentType: 'application/json;charset=utf-8',
+        success : function(data){ //DB접근 후 가져온 데이터
+            $.each(data, function(index,item){
+         	    var marker = {  lat: item.lat*=1, lng: item.lng*=1}; // 그냥받으면 문자열이기때문에 형변환
+                marker = new google.maps.Marker({
+                       position: marker, // 마커가 위치할 위도와 경도(변수)
+                       map: map,
+                       title: '검색 결과' // 마커에 마우스 포인트를 갖다댔을 때 뜨는 타이틀
+                });
+                var content = "공원명 : "+item.parkName+"<br>공원분류 : "+item.parkDiv; // 말풍선 안에 들어갈 내용
+                // 마커를 클릭했을 때의 이벤트. 말풍선 뿅~
+                var infowindow = new google.maps.InfoWindow({ content: content});
+
+                google.maps.event.addListener(marker, "click", function() {
+                    infowindow.open(map,marker);
+                }); 
+            });
+        }
+    })
+  }
 	</script>
 </head>
 

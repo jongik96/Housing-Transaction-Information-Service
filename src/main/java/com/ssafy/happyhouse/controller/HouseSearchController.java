@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -71,6 +72,16 @@ public class HouseSearchController {
 		    {
 		    	 result = houseDealService.getHouseDeal(map.get("dong"));
 		    }
+		  return result;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/searchMarkerPark/{no}", method = RequestMethod.GET,consumes="application/json", produces = "application/json; charset=utf-8")
+	public List<ParkDto> searchMarkerPark(@PathVariable("no") int no , Model model, HttpServletResponse response) {
+		List<ParkDto> result=null;
+		 
+		    	 result = houseDealService.getParkInfo(houseDealService.getHouseInfo(no)); 
+		    	
 		  return result;
 	}
 	
