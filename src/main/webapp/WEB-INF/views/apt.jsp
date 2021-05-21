@@ -84,7 +84,7 @@ pageContext.setAttribute("root", root);
            url : '${root }/search/searchMarker', //데이터베이스에 접근해 현재페이지로 결과를 뿌려줄 페이지
            mathod : 'post',
            data : {
-                 "apt": "${apt}","dong":"${dong}"  //0 아파트 1 동검색 
+                 "apt": "${apt}", "dong":"${dong}"  //0 아파트 1 동검색 
            },
            datatype:"json",
            contentType: 'application/json;charset=utf-8',
@@ -96,8 +96,7 @@ pageContext.setAttribute("root", root);
                           map: map,
                           title: '검색 결과' // 마커에 마우스 포인트를 갖다댔을 때 뜨는 타이틀
                    });
-                   var content = "아파트명 : "+item.aptName+"<br>아파트 가격 : "+item.dealAmount; // 말풍선 안에 들어갈 내용
-                   // 마커를 클릭했을 때의 이벤트. 말풍선 뿅~
+                   var content = "아파트명 : "+item.aptName+"<br>아파트 가격 : "+item.dealAmount;
                    var infowindow = new google.maps.InfoWindow({ content: content});
 
                    google.maps.event.addListener(marker, "click", function() {

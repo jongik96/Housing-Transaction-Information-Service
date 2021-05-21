@@ -77,12 +77,16 @@ public class HouseSearchController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/searchMarkerPark/{no}", method = RequestMethod.GET,consumes="application/json", produces = "application/json; charset=utf-8")
-	public List<ParkDto> searchMarkerPark(@PathVariable("no") int no , Model model, HttpServletResponse response) {
-		List<ParkDto> result=null;
-		 
-		    	 result = houseDealService.getParkInfo(houseDealService.getHouseInfo(no)); 
-		    	
-		  return result;
+	public List<ParkDto> searchMarkerPark(@PathVariable int no, Model model, HttpServletResponse response) {
+		List<ParkDto> result = houseDealService.getParkInfo(houseDealService.getHouseInfo(no)); 
+		return result;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/searchMarkerMarket/{no}", method = RequestMethod.GET,consumes="application/json", produces = "application/json; charset=utf-8")
+	public List<MarketDto> searchMarkerMarket(@PathVariable int no, Model model, HttpServletResponse response) {
+		List<MarketDto> result = houseDealService.getMarketInfo(houseDealService.getHouseInfo(no)); 
+		return result;
 	}
 	
 	@RequestMapping(value = "/mvdetail/{no}", method = RequestMethod.GET)
@@ -98,14 +102,5 @@ public class HouseSearchController {
 		
 		return "aptdetail";
 	}
-	
-//	@RequestMapping(value = "")
-//	public List<ParkDto> getParkInfo(@RequestParam Map<String,String> map, Model model, HttpServletRequest response){
-//		List<ParkDto> result = null;
-//		
-//		
-//		
-//		return result;
-//	}
 
 }

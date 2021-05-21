@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <c:set var="root" value="${pageContext.request.contextPath }" />
 <!DOCTYPE html>
 <html lang="en">
@@ -74,31 +74,31 @@
 		});
 		</script>
 <script>
+
 function initMap() {
-    var myLatLng = {  lat: 37.533582, lng: 126.976109};
+    var myLatLng = { lat: ${house.lat}, lng: ${house.lng} };
     const map = new google.maps.Map(document.getElementById("map"), {
-      zoom: 11,
+      zoom: 16,
       center: myLatLng,
     });
-    $.ajax({
-        url : '${root }/search/searchMarkerPark/${house.no}', //데이터베이스에 접근해 현재페이지로 결과를 뿌려줄 페이지
-        mathod : 'post',
-        data : {
-              "no": "${house.no}"  //0 아파트 1 동검색 
-        },
+    
+    $.ajax({ // 주변 공원 데이터를 받아온다
+        url : '${root}/search/searchMarkerPark/${house.no}', //데이터베이스에 접근해 현재페이지로 결과를 뿌려줄 페이지
+        method : 'get',
+        data : {},
         datatype:"json",
         contentType: 'application/json;charset=utf-8',
         success : function(data){ //DB접근 후 가져온 데이터
             $.each(data, function(index,item){
-         	    var marker = {  lat: item.lat*=1, lng: item.lng*=1}; // 그냥받으면 문자열이기때문에 형변환
-                marker = new google.maps.Marker({
+         	    var marker = {  lat: item.lat*=1, lng: item.lit*=1 }; // 그냥받으면 문자열이기때문에 형변환
+                new google.maps.Marker({
                        position: marker, // 마커가 위치할 위도와 경도(변수)
                        map: map,
                        title: '검색 결과' // 마커에 마우스 포인트를 갖다댔을 때 뜨는 타이틀
                 });
-                var content = "공원명 : "+item.parkName+"<br>공원분류 : "+item.parkDiv; // 말풍선 안에 들어갈 내용
+                var content = "공원명 : "+item.parkName+"<br>공원분류 : "+ item.parkDiv; // 말풍선 안에 들어갈 내용
                 // 마커를 클릭했을 때의 이벤트. 말풍선 뿅~
-                var infowindow = new google.maps.InfoWindow({ content: content});
+                var infowindow = new google.maps.InfoWindow({content: content});
 
                 google.maps.event.addListener(marker, "click", function() {
                     infowindow.open(map,marker);
@@ -106,6 +106,42 @@ function initMap() {
             });
         }
     })
+    
+    $.ajax({ // 주변 공원 데이터를 받아온다
+        url : '${root}/search/searchMarkerMarket/${house.no}', //데이터베이스에 접근해 현재페이지로 결과를 뿌려줄 페이지
+        method : 'get',
+        data : {},
+        datatype:"json",
+        contentType: 'application/json;charset=utf-8',
+        success : function(data){ //DB접근 후 가져온 데이터
+            $.each(data, function(index,item){
+         	    var marker = {  lat: item.lat*=1, lng: item.lit*=1 }; // 그냥받으면 문자열이기때문에 형변환
+                new google.maps.Marker({
+                       position: marker, // 마커가 위치할 위도와 경도(변수)
+                       map: map,
+                       title: '검색 결과' // 마커에 마우스 포인트를 갖다댔을 때 뜨는 타이틀
+                });
+                var content = " - "+item.mname+"<br>분류 "+ item.type_lit; // 말풍선 안에 들어갈 내용
+                // 마커를 클릭했을 때의 이벤트. 말풍선 뿅~
+                var infowindow = new google.maps.InfoWindow({content: content});
+
+                google.maps.event.addListener(marker, "click", function() {
+                    infowindow.open(map,marker);
+                }); 
+            });
+        }
+    })
+    
+    new google.maps.Marker({
+    	position: { lat: ${house.lat}, lng: ${house.lng} },
+    	label : "${house.aptName}",
+    	map: map
+    });
+    
+    
+    
+    
+    
   }
 	</script>
 </head>
@@ -188,66 +224,72 @@ function initMap() {
 
 			</div>
 		</div>
-		
+
 	</header>
 
 
 	<section>
 		<div class="container mt-3 mb-3">
-
-
-
-			<div class="row">
+			<div class="row mb-5">
+				<div class="col-md-2"></div>
 				<div class="col-md-8">
 					<h3>${house.aptName}</h3>
 				</div>
+				<div class="col-md-2"></div>
 			</div>
 
-			<div class="row">
+			<div class="row mb-5">
+				<div class="col-md-2"></div>
 				<div class="col-md-8">
 					<div id="map" style="width: 100%; height: 500px; margin: auto;"></div>
 				</div>
+				<div class="col-md-2"></div>
 			</div>
 
-			<c:if test="${marketlist ne null }">
-			 	근처에 이런 상점이 있어요!
-			 	<table class="table">
-					<thead>
-						<tr>
-							<th>가게 이름</th>
-							<th>소분류</th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach var="market" items="${marketlist}">
-							<tr>
-								<td>${market.mname}</td>
-								<td>${market.type_lit}</td>
-							</tr>
-						</c:forEach>
-					</tbody>
-				</table>
-			</c:if>
-
-			<c:if test="${parklist ne null }">
-			 	근처에 공원이 있어요
-			 	<table class="table">
-					<thead>
-						<tr>
-							<th>공원 이름</th>
-							<th>분류</th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach var="park" items="${parklist}">
-							<tr>
-								<td>${park.parkname}</td>
-								<td>${park.parkdiv}</td>
-							</tr>
-						</c:forEach>
-					</tbody>
-				</table>
-			</c:if>
+			<div class="row">
+				<div class="col-md-6">
+					<c:if test="${marketlist ne null }">
+						<h6>- 주변에 이런 곳들이 있어요</h6>
+						<table class="table">
+							<thead>
+								<tr>
+									<th>가게 이름</th>
+									<th>소분류</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach var="market" items="${marketlist}">
+									<tr>
+										<td>${market.mname}</td>
+										<td>${market.type_lit}</td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+					</c:if>
+				</div>
+				<div class="col-md-6">
+					<c:if test="${parklist ne null }">
+						<h6>- 근처에 공원이 있어요</h6>
+						<table class="table">
+							<thead>
+								<tr>
+									<th>공원 이름</th>
+									<th>분류</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach var="park" items="${parklist}">
+									<tr>
+										<td>${park.parkname}</td>
+										<td>${park.parkdiv}</td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+					</c:if>
+				</div>
+			</div>
 		</div>
 	</section>
 
