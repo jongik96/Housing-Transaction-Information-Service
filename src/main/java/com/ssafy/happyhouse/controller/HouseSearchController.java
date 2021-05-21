@@ -79,11 +79,6 @@ public class HouseSearchController {
 		
 		HouseDealDto house = houseDealService.getHouseInfo(no);
 		List<ParkDto> parklist = houseDealService.getParkInfo(house);
-		
-		for(ParkDto p : parklist) {
-			System.out.println(p.getParkname());
-		}
-		
 		List<MarketDto> marketlist = houseDealService.getMarketInfo(house);
 		
 		model.addAttribute("parklist", parklist);
