@@ -181,7 +181,7 @@ pageContext.setAttribute("root", root);
                     <c:if test="${houselist ne null }">
                         <c:forEach var = "house" items = "${houselist}">
                         <tr>
-                        <td>이름 : ${house.aptName}<br>
+                        <td>이름 : <a href="${root}/search/mvdetail/${house.no}">${house.aptName}</a><br>
 			                        거래금액: ${house.dealAmount}<br>
 			                        면적: ${house.area }<br>
 			                        등록일 : ${house.dealYear }.${house.dealMonth }.${house.dealDay }<br>

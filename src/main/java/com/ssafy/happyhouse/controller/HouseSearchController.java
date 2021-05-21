@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ssafy.happyhouse.dto.AddressDto;
 import com.ssafy.happyhouse.dto.HouseDealDto;
+import com.ssafy.happyhouse.dto.MarketDto;
 import com.ssafy.happyhouse.dto.ParkDto;
 import com.ssafy.happyhouse.service.HouseDealService;
 
@@ -72,13 +74,32 @@ public class HouseSearchController {
 		  return result;
 	}
 	
-	@RequestMapping(value = "")
-	public List<ParkDto> getParkInfo(@RequestParam Map<String,String> map, Model model, HttpServletRequest response){
-		List<ParkDto> result = null;
+	@RequestMapping(value = "/mvdetail/{no}", method = RequestMethod.GET)
+	public String mvdetail(@PathVariable("no") int no, Model model, HttpServletRequest response) {
 		
+		HouseDealDto house = houseDealService.getHouseInfo(no);
+		List<ParkDto> parklist = houseDealService.getParkInfo(house);
 		
+		for(ParkDto p : parklist) {
+			System.out.println(p.getParkname());
+		}
 		
-		return result;
+		List<MarketDto> marketlist = houseDealService.getMarketInfo(house);
+		
+		model.addAttribute("parklist", parklist);
+		model.addAttribute("marketlist", marketlist);
+		model.addAttribute("house", house);
+		
+		return "aptdetail";
 	}
+	
+//	@RequestMapping(value = "")
+//	public List<ParkDto> getParkInfo(@RequestParam Map<String,String> map, Model model, HttpServletRequest response){
+//		List<ParkDto> result = null;
+//		
+//		
+//		
+//		return result;
+//	}
 
 }

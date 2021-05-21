@@ -36,8 +36,8 @@ public class HouseDealDto {
 	private String jibun;
 	private String type;
 	private String rentMoney;
-	private String lat;
-	private String lng;
+	private float lat;
+	private float lng;
 	private String img;
 	
 	public int getNo() {
@@ -124,16 +124,17 @@ public class HouseDealDto {
 	public void setRentMoney(String rentMoney) {
 		this.rentMoney = rentMoney;
 	}
-	public String getLat() {
+	
+	public float getLat() {
 		return lat;
 	}
-	public void setLat(String lat) {
+	public void setLat(float lat) {
 		this.lat = lat;
 	}
-	public String getLng() {
+	public float getLng() {
 		return lng;
 	}
-	public void setLng(String lng) {
+	public void setLng(float lng) {
 		this.lng = lng;
 	}
 	public String getImg() {
