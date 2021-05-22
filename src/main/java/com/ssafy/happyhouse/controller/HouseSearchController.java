@@ -76,6 +76,9 @@ public class HouseSearchController {
 			model.addAttribute("address", address);
 			
 			List<houseInfoDto> hlist = houseDealService.getHouseByRange(address);
+			
+			if(hlist.size()<=0) hlist = null;
+			
 			model.addAttribute("hlist", hlist);
 			
 			return "apt";
