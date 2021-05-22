@@ -8,7 +8,7 @@ public class SchoolDto {
 	String address_jibun;
 	String address_st;
 	float lat;
-	float lng;
+	float lit;
 	
 	public String getId() {
 		return id;
@@ -52,10 +52,10 @@ public class SchoolDto {
 	public void setLat(float lat) {
 		this.lat = lat;
 	}
-	public float getLng() {
-		return lng;
+	public float getLit() {
+		return lit;
 	}
-	public void setLng(float lng) {
-		this.lng = lng;
+	public void setLit(float lit) {
+		this.lit = lit;
 	}
 }

@@ -2,12 +2,14 @@ package com.ssafy.happyhouse.service;
 
 import java.util.List;
 
+
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ssafy.happyhouse.dto.BusstopDto;
 import com.ssafy.happyhouse.dto.HouseDealDto;
 import com.ssafy.happyhouse.dto.MarketDto;
 import com.ssafy.happyhouse.dto.ParkDto;
@@ -45,6 +47,13 @@ public class HouseDealServiceImpl implements HouseDealService {
 	@Override
 	public List<MarketDto> getMarketInfo(HouseDealDto house) {
 		return sqlSession.getMapper(HouseDealRepo.class).getMarketInfo(house);
+	}
+
+
+	@Override
+	public List<BusstopDto> getBusstopInfo(HouseDealDto house) {
+		// TODO Auto-generated method stub
+		return sqlSession.getMapper(HouseDealRepo.class).getBusstopInfo(house);
 	}
 	
 }
