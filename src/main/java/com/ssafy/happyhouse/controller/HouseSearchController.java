@@ -18,9 +18,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ssafy.happyhouse.dto.AddressDto;
+import com.ssafy.happyhouse.dto.BusstopDto;
 import com.ssafy.happyhouse.dto.HouseDealDto;
 import com.ssafy.happyhouse.dto.MarketDto;
 import com.ssafy.happyhouse.dto.ParkDto;
+import com.ssafy.happyhouse.dto.PoliceDto;
+import com.ssafy.happyhouse.dto.SchoolDto;
 import com.ssafy.happyhouse.service.HouseDealService;
 
 @Controller
@@ -90,15 +93,36 @@ public class HouseSearchController {
 		return result;
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = "/searchMarkerBusstop/{no}", method = RequestMethod.GET,consumes="application/json", produces = "application/json; charset=utf-8")
+	public List<BusstopDto> searchMarkerBusstop(@PathVariable int no, Model model, HttpServletResponse response) {
+		List<BusstopDto> result = houseDealService.getBusstopInfo(houseDealService.getHouseInfo(no)); 
+		return result;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/searchMarkerpolice/{no}", method = RequestMethod.GET,consumes="application/json", produces = "application/json; charset=utf-8")
+	public List<PoliceDto> searchMarkerpolice(@PathVariable int no, Model model, HttpServletResponse response) {
+		List<PoliceDto> result = houseDealService.getPoliceInfo(houseDealService.getHouseInfo(no)); 
+		return result;
+	}
+	
 	@RequestMapping(value = "/mvdetail/{no}", method = RequestMethod.GET)
 	public String mvdetail(@PathVariable("no") int no, Model model, HttpServletRequest response) {
 		
 		HouseDealDto house = houseDealService.getHouseInfo(no);
 		List<ParkDto> parklist = houseDealService.getParkInfo(house);
 		List<MarketDto> marketlist = houseDealService.getMarketInfo(house);
-		
+		List<BusstopDto> busstoplist = houseDealService.getBusstopInfo(house);
+		List<PoliceDto> policelist = houseDealService.getPoliceInfo(house);
 		model.addAttribute("parklist", parklist);
 		model.addAttribute("marketlist", marketlist);
+		model.addAttribute("busstoplist", busstoplist);
+		model.addAttribute("policelist", policelist);
+		for(BusstopDto x : busstoplist) {
+			System.out.println(x.getBusstop_name());
+		}
+		
 		model.addAttribute("house", house);
 		
 		return "aptdetail";
