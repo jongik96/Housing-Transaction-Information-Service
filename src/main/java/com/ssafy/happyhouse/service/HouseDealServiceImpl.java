@@ -13,6 +13,7 @@ import com.ssafy.happyhouse.dto.BusstopDto;
 import com.ssafy.happyhouse.dto.HouseDealDto;
 import com.ssafy.happyhouse.dto.MarketDto;
 import com.ssafy.happyhouse.dto.ParkDto;
+import com.ssafy.happyhouse.dto.PoliceDto;
 import com.ssafy.happyhouse.repo.HouseDealRepo;
 
 @Service
@@ -52,8 +53,12 @@ public class HouseDealServiceImpl implements HouseDealService {
 
 	@Override
 	public List<BusstopDto> getBusstopInfo(HouseDealDto house) {
-		// TODO Auto-generated method stub
 		return sqlSession.getMapper(HouseDealRepo.class).getBusstopInfo(house);
+	}
+
+	@Override
+	public List<PoliceDto> getPoliceInfo(HouseDealDto house) {
+		return sqlSession.getMapper(HouseDealRepo.class).getPoliceInfo(house);
 	}
 	
 }

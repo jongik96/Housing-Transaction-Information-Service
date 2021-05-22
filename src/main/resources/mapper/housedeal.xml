@@ -31,6 +31,11 @@
 		FROM busstop <![CDATA[HAVING distance <= 100]]> ORDER BY distance LIMIT 20;
 	</select>
 	
+	<select id="getPoliceInfo" parameterType="HouseDealDto" resultType="PoliceDto">
+		SELECT *, (6371*acos(cos(radians(lat))*cos(radians(#{lat}))*cos(radians(#{lng})-radians(lit))+sin(radians(lat))*sin(radians(#{lat})))) AS distance 
+		FROM policeinfo <![CDATA[HAVING distance <= 2]]> ORDER BY distance LIMIT 20;
+	</select>
+	
 	<select id="getHouseInfo" parameterType="int" resultType="HouseDealDto">
 		SELECT * from houseinfo where no = #{no}
 	</select>
