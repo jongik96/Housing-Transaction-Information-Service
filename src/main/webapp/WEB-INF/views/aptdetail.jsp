@@ -91,23 +91,39 @@ function initMap() {
         success : function(data){ //DB접근 후 가져온 데이터
             $.each(data, function(index,item){
          	    var marker = {  lat: item.lat*=1, lng: item.lit*=1 }; // 그냥받으면 문자열이기때문에 형변환
-                new google.maps.Marker({
+                marker = new google.maps.Marker({
+                	  icon:
+                	   {
+                		   url: "https://maps.google.com/mapfiles/ms/icons/green-dot.png"
+                	   },
                        position: marker, // 마커가 위치할 위도와 경도(변수)
                        map: map,
+                      
                        title: '검색 결과' // 마커에 마우스 포인트를 갖다댔을 때 뜨는 타이틀
                 });
-                var content = "공원명 : "+item.parkName+"<br>공원분류 : "+ item.parkDiv; // 말풍선 안에 들어갈 내용
+                var content = "공원명 : "+item.parkname+"<br>공원분류 : "+ item.parkdiv; // 말풍선 안에 들어갈 내용
                 // 마커를 클릭했을 때의 이벤트. 말풍선 뿅~
                 var infowindow = new google.maps.InfoWindow({content: content});
-
+           
                 google.maps.event.addListener(marker, "click", function() {
+                	
                     infowindow.open(map,marker);
                 }); 
+                if (marker) {
+                    marker.addListener('click', function() {
+                        
+                        //중심 위치를 클릭된 마커의 위치로 변경
+                        map.setCenter(this.getPosition());
+ 
+                        //마커 클릭 시의 줌 변화
+                        map.setZoom(17);
+                    });
+                }
             });
         }
     })
     
-    $.ajax({ // 주변 공원 데이터를 받아온다
+    $.ajax({ // 주변 상점 데이터를 받아온다
         url : '${root}/search/searchMarkerMarket/${house.no}', //데이터베이스에 접근해 현재페이지로 결과를 뿌려줄 페이지
         method : 'get',
         data : {},
@@ -116,7 +132,10 @@ function initMap() {
         success : function(data){ //DB접근 후 가져온 데이터
             $.each(data, function(index,item){
          	    var marker = {  lat: item.lat*=1, lng: item.lit*=1 }; // 그냥받으면 문자열이기때문에 형변환
-                new google.maps.Marker({
+         	   marker = new google.maps.Marker({
+                	 icon:{
+              		   url: "https://maps.google.com/mapfiles/ms/icons/yellow-dot.png"
+              	   },
                        position: marker, // 마커가 위치할 위도와 경도(변수)
                        map: map,
                        title: '검색 결과' // 마커에 마우스 포인트를 갖다댔을 때 뜨는 타이틀
@@ -128,21 +147,111 @@ function initMap() {
                 google.maps.event.addListener(marker, "click", function() {
                     infowindow.open(map,marker);
                 }); 
+                if (marker) {
+                    marker.addListener('click', function() {
+                        
+                        //중심 위치를 클릭된 마커의 위치로 변경
+                        map.setCenter(this.getPosition());
+ 
+                        //마커 클릭 시의 줌 변화
+                        map.setZoom(17);
+                    });
+                }
+            });
+        }
+    })
+    
+    $.ajax({ // 주변 버정 데이터를 받아온다
+        url : '${root}/search/searchMarkerBusstop/${house.no}', //데이터베이스에 접근해 현재페이지로 결과를 뿌려줄 페이지
+        method : 'get',
+        data : {},
+        datatype:"json",
+        contentType: 'application/json;charset=utf-8',
+        success : function(data){ //DB접근 후 가져온 데이터
+            $.each(data, function(index,item){
+         	    var marker = {  lat: item.lat*=1, lng: item.lit*=1 }; // 그냥받으면 문자열이기때문에 형변환
+                marker = new google.maps.Marker({
+                	  icon:
+                	   {
+                		   url: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+                	   },
+                       position: marker, // 마커가 위치할 위도와 경도(변수)
+                       map: map,
+                      
+                       title: '검색 결과' // 마커에 마우스 포인트를 갖다댔을 때 뜨는 타이틀
+                });
+                var content = "버정이름 : "+item.busstop_name; // 말풍선 안에 들어갈 내용
+                // 마커를 클릭했을 때의 이벤트. 말풍선 뿅~
+                var infowindow = new google.maps.InfoWindow({content: content});
+
+                google.maps.event.addListener(marker, "click", function() {
+                    infowindow.open(map,marker);
+                }); 
+                if (marker) {
+                    marker.addListener('click', function() {
+                        
+                        //중심 위치를 클릭된 마커의 위치로 변경
+                        map.setCenter(this.getPosition());
+ 
+                        //마커 클릭 시의 줌 변화
+                        map.setZoom(17);
+                    });
+                }
+            });
+        }
+    })
+    
+     $.ajax({ // 주변 버정 데이터를 받아온다
+        url : '${root}/search/searchMarkerpolice/${house.no}', //데이터베이스에 접근해 현재페이지로 결과를 뿌려줄 페이지
+        method : 'get',
+        data : {},
+        datatype:"json",
+        contentType: 'application/json;charset=utf-8',
+        success : function(data){ //DB접근 후 가져온 데이터
+            $.each(data, function(index,item){
+         	    var marker = {  lat: item.lat*=1, lng: item.lit*=1 }; // 그냥받으면 문자열이기때문에 형변환
+                marker = new google.maps.Marker({
+                	  icon:
+                	   {
+                		   url: "https://maps.google.com/mapfiles/ms/icons/purple-dot.png"
+                	   },
+                       position: marker, // 마커가 위치할 위도와 경도(변수)
+                       map: map,
+                      
+                       title: '검색 결과' // 마커에 마우스 포인트를 갖다댔을 때 뜨는 타이틀
+                });
+                var content = "경찰서명 : "+item.police_name; // 말풍선 안에 들어갈 내용
+                // 마커를 클릭했을 때의 이벤트. 말풍선 뿅~
+                var infowindow = new google.maps.InfoWindow({content: content});
+
+                google.maps.event.addListener(marker, "click", function() {
+                    infowindow.open(map,marker);
+                }); 
+                if (marker) {
+                    marker.addListener('click', function() {
+                        
+                        //중심 위치를 클릭된 마커의 위치로 변경
+                        map.setCenter(this.getPosition());
+ 
+                        //마커 클릭 시의 줌 변화
+                        map.setZoom(17);
+                    });
+                }
             });
         }
     })
     
     new google.maps.Marker({
     	position: { lat: ${house.lat}, lng: ${house.lng} },
-    	label : "${house.aptName}",
+    	label : "${house.aptName}.png",
     	map: map
     });
     
+}
     
     
     
-    
-  }
+  
 	</script>
 </head>
 
@@ -249,7 +358,7 @@ function initMap() {
 			<div class="row">
 				<div class="col-md-6">
 					<c:if test="${marketlist ne null }">
-						<h6>- 주변에 이런 곳들이 있어요</h6>
+						<h6>- 주변에 이런 곳들이 있어요</h6><img src="https://maps.google.com/mapfiles/ms/icons/yellow-dot.png">상권
 						<table class="table">
 							<thead>
 								<tr>
@@ -267,10 +376,13 @@ function initMap() {
 							</tbody>
 						</table>
 					</c:if>
+					<c:if test="${marketlist eq null }">
+					주변에 상권이 없어요
+					</c:if>
 				</div>
 				<div class="col-md-6">
 					<c:if test="${parklist ne null }">
-						<h6>- 근처에 공원이 있어요</h6>
+						<h6>- 근처에 공원이 있어요</h6><img src="https://maps.google.com/mapfiles/ms/icons/green-dot.png">공원
 						<table class="table">
 							<thead>
 								<tr>
@@ -288,6 +400,57 @@ function initMap() {
 							</tbody>
 						</table>
 					</c:if>
+					<c:if test="${parklist eq null }">
+					주변에 공원이 없어요
+					</c:if>
+				</div>
+			
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<c:if test="${busstoplist ne null }">
+						<h6>- 근처에 버스정류장이 있어요</h6><img src="https://maps.google.com/mapfiles/ms/icons/blue-dot.png">버스정류장
+						<table class="table">
+							<thead>
+								<tr>
+									<th>버정 이름</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach var="busstop" items="${busstoplist}">
+									<tr>
+										<td>${busstop.busstop_name}</td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+					</c:if>
+					<c:if test="${busstoplist eq null }">
+					주변에 경찰서 없어요
+					</c:if>
+					</div>
+					<div class="col-md-6">
+					<c:if test="${policelist ne null }">
+						<h6>- 근처에 경찰서가 있어요</h6><img src="https://maps.google.com/mapfiles/ms/icons/purple-dot.png">경찰서
+						<table class="table">
+							<thead>
+								<tr>
+									<th>경찰서 이름</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach var="police" items="${policelist}">
+									<tr>
+										<td>${police.police_name}</td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+					</c:if>
+					<c:if test="${policelist eq null }">
+					주변에 버정이 없어요
+					</c:if>
+					
 				</div>
 			</div>
 		</div>
