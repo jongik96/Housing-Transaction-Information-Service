@@ -18,4 +18,11 @@
 		group by dong
 	</select>
 	
+	
+	<select id="getBaseAddress" parameterType="AddressDto" resultType="AddressDto">
+		select *
+		from baseaddress where city = #{city} and gugun = #{gugun} and dong = #{dong}
+	</select>
+	
+	
 </mapper>

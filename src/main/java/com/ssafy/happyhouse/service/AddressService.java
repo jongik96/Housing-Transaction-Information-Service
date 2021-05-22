@@ -9,4 +9,5 @@ public interface AddressService {
 	public List<AddressDto> getSiList();
 	public List<AddressDto> getGugunList(String sicode);
 	public List<AddressDto> getDongList(String guguncode);
+	public AddressDto getBaseAddress(AddressDto selected);
 }

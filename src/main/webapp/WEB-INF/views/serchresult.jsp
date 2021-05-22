@@ -325,11 +325,61 @@
 			<div class="col-md-8">
 				<div class="boreder border-right-0">
 					<h4>검색된 아파트 정보</h4>
+					
+					<table class="table table-hover">
+					<tbody>
+                    <c:if test="${hlist ne null }">
+                        <c:forEach var = "house" items = "${hlist}">
+                        <tr>
+                        <td><a href="${root}/search/mvdetail/${house.no}">${house.aptName}</a><br>
+                        <img src="${root}/img/${house.img}" width="350" height="260" alt="no search image"><br>
+			            	위치 : ${house.dong} ${house.jibun}<br>
+			            	준공년도 : ${house.buildYear}
+				        
+                        </td>
+                        </tr>
+                        </c:forEach>
+                    </c:if>
+                    <c:if test="${hlist eq null }">
+                    	<tr><th>검색결과가 존재하지 않습니다.</th></tr>
+                    </c:if>
+                    </table>
+					
 				</div>
 			</div>
 
 			<div class="col-md-4">
 				<h4>최근 거래 정보</h4>
+				<table class="table table-hover">
+                    <tbody>
+                    <c:if test="${houselist ne null }">
+                        <c:forEach var = "house" items = "${houselist}">
+                        <tr>
+                        <td><a href="${root}/search/mvDeal/${house.no}">${house.aptName}</a><br>
+			                        거래금액: ${house.dealAmount} (만원)<br>
+			                        면적: ${house.area }<br>
+			                        등록일 : ${house.dealYear }.${house.dealMonth }.${house.dealDay}<br>
+				        <img src="${root}/img/${house.img}" width="160" height="120" alt="no search image">
+                        </td>
+                        </tr>
+                        </c:forEach>
+                        </c:if>
+                    <c:if test="${aptlist ne null }">
+                        <c:forEach var = "house" items = "${aptlist}">
+                        <tr>
+                        <td><a href="${root}/search/mvDeal/${house.no}">${house.aptName}</a><br>
+			                        거래금액: ${house.dealAmount} (만원)<br>
+			                        면적: ${house.area }<br>
+			                        등록일 : ${house.dealYear }.${house.dealMonth }.${house.dealDay }<br>
+				               <img src="${root}/img/${house.img}" width="160" height="120">
+                        </td>
+                        </tr>
+                        </c:forEach>
+                        </c:if>
+                    </tbody>
+                    </table>
+				
+				
 			</div>
 		</div>
 

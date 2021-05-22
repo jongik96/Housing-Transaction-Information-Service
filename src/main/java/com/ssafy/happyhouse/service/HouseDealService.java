@@ -2,11 +2,13 @@ package com.ssafy.happyhouse.service;
 
 import java.util.List;
 
+import com.ssafy.happyhouse.dto.AddressDto;
 import com.ssafy.happyhouse.dto.BusstopDto;
 import com.ssafy.happyhouse.dto.HouseDealDto;
 import com.ssafy.happyhouse.dto.MarketDto;
 import com.ssafy.happyhouse.dto.ParkDto;
 import com.ssafy.happyhouse.dto.PoliceDto;
+import com.ssafy.happyhouse.dto.houseInfoDto;
 
 public interface HouseDealService {
 	public List<HouseDealDto> getHouseDeal(String dongcode);
@@ -17,4 +19,6 @@ public interface HouseDealService {
 	
 	List<BusstopDto> getBusstopInfo(HouseDealDto house);
 	List<PoliceDto> getPoliceInfo(HouseDealDto house);
+	public List<houseInfoDto> serchHouse(String aptname);
+	public List<houseInfoDto> getHouseByRange(AddressDto address);
 }

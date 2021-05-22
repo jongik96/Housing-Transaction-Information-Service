@@ -35,4 +35,9 @@ public class AddressServiceImpl implements AddressService {
 		return sqlSession.getMapper(AddressRepo.class).getDongList(guguncode);
 	}
 
+	@Override
+	public AddressDto getBaseAddress(AddressDto selected) {
+		return sqlSession.getMapper(AddressRepo.class).getBaseAddress(selected);
+	}
+
 }

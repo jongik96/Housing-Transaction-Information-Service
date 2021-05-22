@@ -337,25 +337,29 @@ function initMap() {
 	</header>
 
 
-	<section>
-		<div class="container mt-3 mb-3">
-			<div class="row mb-5">
-				<div class="col-md-2"></div>
+	<section class="container mt-3 mb-3">
+		<div>
+			<div class="row mt-5 mb-5">
 				<div class="col-md-8">
 					<h3>${house.aptName}</h3>
 				</div>
-				<div class="col-md-2"></div>
 			</div>
 
 			<div class="row mb-5">
-				<div class="col-md-2"></div>
-				<div class="col-md-8">
+				<div class="col-md-7">
+					<img src="${root}/img/${house.img}" width=100% height=100% alt="no search image">
+				</div>
+				<div class="col-md-5">
 					<div id="map" style="width: 100%; height: 500px; margin: auto;"></div>
 				</div>
-				<div class="col-md-2"></div>
+			</div>
+			
+			<div>
+				
+			
 			</div>
 
-			<div class="row">
+			<div class="row mb-5">
 				<div class="col-md-6">
 					<c:if test="${marketlist ne null }">
 						<h6>- 주변에 이런 곳들이 있어요</h6><img src="https://maps.google.com/mapfiles/ms/icons/yellow-dot.png">상권
@@ -406,7 +410,7 @@ function initMap() {
 				</div>
 			
 			</div>
-			<div class="row">
+			<div class="row mb-5">
 				<div class="col-md-6">
 					<c:if test="${busstoplist ne null }">
 						<h6>- 근처에 버스정류장이 있어요</h6><img src="https://maps.google.com/mapfiles/ms/icons/blue-dot.png">버스정류장
