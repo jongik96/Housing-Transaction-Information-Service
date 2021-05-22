@@ -38,7 +38,6 @@ public class HouseDealDto {
 	private String rentMoney;
 	private float lat;
 	private float lng;
-	private String img;
 	
 	public int getNo() {
 		return no;
@@ -136,11 +135,5 @@ public class HouseDealDto {
 	}
 	public void setLng(float lng) {
 		this.lng = lng;
-	}
-	public String getImg() {
-		return img;
-	}
-	public void setImg(String img) {
-		this.img = img;
 	}
 }

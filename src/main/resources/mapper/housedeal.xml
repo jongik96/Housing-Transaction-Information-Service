@@ -30,4 +30,6 @@
 		SELECT * from houseinfo where no = #{no}
 	</select>
 	
+	<select id="serchApt" parameterType="String"
+	
 </mapper>

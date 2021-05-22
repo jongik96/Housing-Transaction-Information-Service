@@ -72,7 +72,7 @@ pageContext.setAttribute("root", root);
 			});
 		});
 		</script>
-         <script>
+   <script>
 
    function initMap() {
        var myLatLng = {  lat: 37.533582, lng: 126.976109};

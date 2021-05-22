@@ -37,13 +37,14 @@ public class HouseSearchController {
 			List<HouseDealDto> list = houseDealService.getAptDeal(aptname);
 			model.addAttribute("aptlist", list);
 			model.addAttribute("apt", aptname);
-			return "apt";
+			return "serchresult";
 		}catch(Exception e) {
 			e.printStackTrace();
 			model.addAttribute("msg","APT 검색 중 문제 발생");
 			return "error/error.jsp";
 		}
 	}
+	
 	@RequestMapping(value = "/searchDong", method ={RequestMethod.GET, RequestMethod.POST})
 	public String searchDong(@RequestParam Map<String, String> map, Model model) {
 		
