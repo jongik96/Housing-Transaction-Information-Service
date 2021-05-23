@@ -69,8 +69,11 @@ public class HouseSearchController {
 
 			AddressDto selected = new AddressDto();
 			selected.setCity(map.get("city"));
+			System.out.println(selected.getCity());
 			selected.setGugun(map.get("gugun"));
+			System.out.println(selected.getGugun());
 			selected.setDong(map.get("dong"));
+			System.out.println(selected.getDong());
 			
 			AddressDto address = addressService.getBaseAddress(selected);
 			model.addAttribute("address", address);

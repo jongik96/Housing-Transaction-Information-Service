@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.ssafy.happyhouse.dto.AddressDto;
 import com.ssafy.happyhouse.service.InterestService;
 
 @Controller
@@ -17,10 +18,16 @@ public class InterestController {
 	private InterestService interestService;
 	
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
-	public String insertInterest(@Param("userid") String userid, @Param("dong") String dong) {
+	public String insertInterest(@Param("userid") String userid,@Param("city") String city, @Param("gugun") String gugun, @Param("dong") String dong) {
 		System.out.println(userid);
 		try {
-			interestService.registerInterest(userid, dong);
+			
+			AddressDto addressdto = new AddressDto();
+			addressdto.setCity(city);
+			addressdto.setGugun(gugun);
+			addressdto.setDong(dong);
+			int no=interestService.getNo(addressdto);
+			interestService.registerInterest(userid, no);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "error/error.jsp";
