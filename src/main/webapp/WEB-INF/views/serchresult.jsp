@@ -355,7 +355,7 @@
                     <c:if test="${houselist ne null }">
                         <c:forEach var = "house" items = "${houselist}">
                         <tr>
-                        <td><a href="${root}/search/mvDeal/${house.no}">${house.aptName}</a><br>
+                        <td><a href="${root}/search/mvdealdetail/${house.no}">${house.aptName}</a><br>
 			                        거래금액: ${house.dealAmount} (만원)<br>
 			                        면적: ${house.area }<br>
 			                        등록일 : ${house.dealYear }.${house.dealMonth }.${house.dealDay}<br>
@@ -367,7 +367,7 @@
                     <c:if test="${aptlist ne null }">
                         <c:forEach var = "house" items = "${aptlist}">
                         <tr>
-                        <td><a href="${root}/search/mvDeal/${house.no}">${house.aptName}</a><br>
+                        <td><a href="${root}/search/mvdealdetail/${house.no}">${house.aptName}</a><br>
 			                        거래금액: ${house.dealAmount} (만원)<br>
 			                        면적: ${house.area }<br>
 			                        등록일 : ${house.dealYear }.${house.dealMonth }.${house.dealDay }<br>
@@ -555,5 +555,7 @@
 	<script src="assets/mail/contact_me.js"></script>
 	<!-- Core theme JS-->
 	<script src="js/scripts.js"></script>
+	
+	
 </body>
 </html>

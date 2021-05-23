@@ -9,7 +9,12 @@
 		from housedeal h right outer join houseinfo i on h.aptname=i.aptname
 		where h.dong = #{dongcode} and i.dong= #{dongcode} order by dealYear desc, dealMonth desc, dealDay desc
 	</select>
-
+	<select id="getHouseDealDetail" parameterType="int" resultType="HouseDealDto">
+		select *
+		from housedeal h
+		where h.no = #{no}
+	</select>
+	
 	<select id="getAptDeal" parameterType="HouseDealDto" resultType="HouseDealDto">
 		select * 
 		from housedeal h left outer join houseinfo i on h.AptName=i.AptName 

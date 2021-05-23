@@ -58,7 +58,7 @@ public class HouseSearchController {
 			return "error/error.jsp";
 		}
 	}
-
+	
 	@RequestMapping(value = "/searchDong", method ={RequestMethod.GET, RequestMethod.POST})
 	public String searchDong(@RequestParam Map<String, String> map, Model model) {
 
@@ -160,6 +160,16 @@ public class HouseSearchController {
 		model.addAttribute("house", house);
 
 		return "aptdetail";
+	}
+	@RequestMapping(value = "/mvdealdetail/{no}", method = RequestMethod.GET)
+	public String mvdealdetail(@PathVariable("no") int no, Model model, HttpServletRequest response) {
+
+		HouseDealDto house = houseDealService.getHouseDealDetail(no);
+		
+
+		model.addAttribute("house", house);
+
+		return "dealdetail";
 	}
 
 }

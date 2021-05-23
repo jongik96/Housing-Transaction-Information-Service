@@ -42,6 +42,7 @@ public class HouseDealServiceImpl implements HouseDealService {
 		return sqlSession.getMapper(HouseDealRepo.class).getHouseInfo(no);
 	}
 
+
 	@Override
 	public List<ParkDto> getParkInfo(HouseDealDto house) {
 		return sqlSession.getMapper(HouseDealRepo.class).getParkInfo(house);
@@ -72,5 +73,11 @@ public class HouseDealServiceImpl implements HouseDealService {
 	public List<houseInfoDto> getHouseByRange(AddressDto address) {
 		return sqlSession.getMapper(HouseDealRepo.class).getHouseByRange(address);
 	}
+
+	@Override
+	public HouseDealDto getHouseDealDetail(int no) {
+		return sqlSession.getMapper(HouseDealRepo.class).getHouseDealDetail(no);
+	}
+
 	
 }
