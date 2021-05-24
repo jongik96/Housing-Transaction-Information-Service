@@ -236,7 +236,7 @@ pageContext.setAttribute("root", root);
 							<c:if test="${houselist ne null }">
 								<c:forEach var="house" items="${houselist}">
 									<tr>
-										<td>이름 : <a href="${root}/search/mvdetail/${house.hno}">${house.aptName}</a><br>
+										<td>이름 : <a href="${root}/search/mvdealdetail/${house.no}">${house.aptName}</a><br>
 											거래금액: ${house.dealAmount}<br> 면적: ${house.area }<br>
 											등록일 : ${house.dealYear }.${house.dealMonth }.${house.dealDay }<br>
 											<img src="${root}/img/${house.img}" width="350" height="260"
@@ -248,7 +248,7 @@ pageContext.setAttribute("root", root);
 							<c:if test="${aptlist ne null }">
 								<c:forEach var="house" items="${aptlist}">
 									<tr>
-										<td>이름 : ${house.aptName}<br> 거래금액:
+										<td>이름 :<a href="${root}/search/mvdealdetail/${house.no}"> ${house.aptName}</a><br> 거래금액:
 											${house.dealAmount}<br> 면적: ${house.area }<br> 등록일
 											: ${house.dealYear }.${house.dealMonth }.${house.dealDay } <img
 											src="${root}/img/${house.img}" width="350" height="260">

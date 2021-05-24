@@ -4,17 +4,21 @@
 
 <mapper namespace="com.ssafy.happyhouse.repo.InterestRepo">
 
-	<select id="getInterest" parameterType="String" resultType="InterestDto">
-		select *
-		from interest
-		where userid = #{userid}
+	<select id="getInterest" parameterType="String" resultType="AddressDto">
+		select city, gugun, dong 
+		from baseaddress 
+		where no = (select no from interest where userid = #{userid})
 	</select>
 
 	<insert id="registerInterest" parameterType="map">
 		insert into interest
-		values (#{userid}, #{dong})
+		values (#{userid}, #{no})
 	</insert>
-	
+	<select id="getNo" parameterType="AddressDto" resultType="int">
+		select no
+		from baseaddress
+		where city=#{city} and gugun=#{gugun} and dong = #{dong}
+	</select>
 	<delete id="deleteInterest" parameterType="map">
 	delete from interest
 	where userid = #{userid} and dong=#{dong}

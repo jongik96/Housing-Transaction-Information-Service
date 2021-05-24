@@ -78,6 +78,7 @@ pageContext.setAttribute("root", root);
 			});
 		});
 		</script>
+		
 </head>
 
 
@@ -158,8 +159,8 @@ pageContext.setAttribute("root", root);
 									<tr>
 									<td>
 											<div class="form-group md-1">
-												${item.dong} 
-												<a class="btn btn-primary" href="${root }/search/searchDong?dong=${item.dong} ">검색</a>
+												${item.city } ${item.gugun } ${item.dong} 
+												<a class="btn btn-primary" href="${root }/search/searchDong?city=${item.city }&gugun=${item.gugun }&dong=${item.dong} ">검색</a>
 												<a class="btn btn-primary" href="${root }/interest/delete?userid=${userinfo.userid }&dong=${item.dong} ">삭제</a>
 											</div></td>
 									</tr>

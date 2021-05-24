@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <c:set var="root" value="${pageContext.request.contextPath }" />
 <!DOCTYPE html>
 <html lang="en">
@@ -26,157 +26,54 @@
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="${root }/css/styles.css" rel="stylesheet" />
 <link href="${root }/css/custom.css" rel="stylesheet" />
-<script defer
-	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFhvndwTb7zd3egLZQsUDFAIaDJtZLhjo&callback=initMap&libraries=&v=weekly"></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+<script type="text/javascript" src="${root }/main.js"></script>
+<script type="text/javascript" src="${root }/area.js"></script>
 <style>
 #map {
 	height: 500px;
 	margin-bottom: 10px;
 }
 </style>
-<style>
-  .border {
-    display: inline-block;
-    width: 70px;
-    height: 70px;
-    margin: 6px;
-  }
-  </style>
-
-
 <script type="text/javascript">
-        
-        //로그인 기능 연결
-		$(document).ready(function() {
-			$("#btn-login").click(function() {
-				if($("#loginId").val() == "") {
-					alert("아이디 입력!!!");
-					return;
-				} else if($("#loginPwd").val() == "") {
-					alert("비밀번호 입력!!!");
-					return;
-				} else {
-					$("#loginform").attr("action", "${root}/user/login").submit();
-				}
-			});
-			
-			//로그아웃 기능 연결
-			$('#logout').click(function(){
-			    alert('로그아웃되었습니다.');
-			    location.href = "${root}/user/logout";
-			})
-			
-			//회원정보삭제 기능 연결
-			$("#delete-btn").click(function() {			
-				let userid="<c:out value='${userinfo.userid}'/>";
-				location.href = "${root}/user/deleteMember?userid="+userid;
-			})
-			
-			
-			
-			$("#searchbyapt").click(function() {
-				let aptname = $("#myInput").val();
-				location.href = "${root}/search/aptSearch?aptname="+aptname;
-			});
+	//로그인 기능 연결
+	$(document).ready(function() {
+		$("#btn-login").click(function() {
+			if ($("#loginId").val() == "") {
+				alert("아이디 입력!!!");
+				return;
+			} else if ($("#loginPwd").val() == "") {
+				alert("비밀번호 입력!!!");
+				return;
+			} else {
+				$("#loginform").attr("action", "${root}/user/login").submit();
+			}
 		});
-		
-		
-		$(function(){
-		     
-		   //군구 리스트 받기
-		$("#city").change(function(){
-			let si = $('#city').val();
-		$.ajax({
-			url:'${root}/address/gugun/' + si,  
-			type:'GET',
-			contentType:'application/json;charset=utf-8',
-			dataType:'json',
-			success:function(address) {
-				var list= "<option value=all >시/군</option>";
-	            $("#gu").empty();
-	            $.each(address, function(index,item){
-	                list+= "<option value=" +item.gugun+" >"+item.gugun+"</option>";
-	            });
-	            $("#gu").append(list);
-			},
-			error:function(xhr,status,msg){
-				console.log("상태값 : " + status + " Http에러메시지 : "+msg);
-			},
-			statusCode: {
-				500: function() {
-					alert("서버에러.");
-					// location.href = "/error/e500";
-				},
-				404: function() {
-					alert("페이지없다.");
-					// location.href = "/error/e404";
-				}
-			}	
+
+		//로그아웃 기능 연결
+		$('#logout').click(function() {
+			alert('로그아웃되었습니다.');
+			location.href = "${root}/user/logout";
+		})
+
+		//회원정보삭제 기능 연결
+		$("#delete-btn").click(function() {
+			let userid = "<c:out value='${userinfo.userid}'/>";
+			location.href = "${root}/user/deleteMember?userid=" + userid;
+		})
+
+		$("#searchbyapt").click(function() {
+			let aptname = $("#myInput").val();
+			location.href = "${root}/search/aptSearch?aptname=" + aptname;
 		});
-		})
-		
-		
-		//동 리스트 받기
-		$("#gu").change(function(){
-			let gugun = $('#gu').val();
-		$.ajax({
-			url:'${root}/address/dong/' + gugun,  
-			type:'GET',
-			contentType:'application/json;charset=utf-8',
-			dataType:'json',
-			success:function(address) {
-				var list= "<option value=all >동</option>";
-	            $("#dong").empty();
-	            $.each(address, function(index,item){
-	                list+= "<option value=" +item.dong+" >"+item.dong+"</option>";
-	            });
-	            $("#dong").append(list);
-			},
-			error:function(xhr,status,msg){
-				console.log("상태값 : " + status + " Http에러메시지 : "+msg);
-			},
-			statusCode: {
-				500: function() {
-					alert("서버에러.");
-					// location.href = "/error/e500";
-				},
-				404: function() {
-					alert("페이지없다.");
-					// location.href = "/error/e404";
-				}
-			}	
-		});
-		})
-		
-		})
-		
-		
-        
-   function initMap() {
-       const myLatLng = {  lat: 37.570705, lng: 126.981354};
-       const map = new google.maps.Map(document.getElementById("map"), {
-         zoom: 15,
-         center: myLatLng,
-       });
-     }
-   function search(){
-		
-       
-	   var form =document.getElementById("frm");
-       var dong = form.dong.value;
-       var gu = form.gu.value;
-       form.act.value = "searchhouse";
-       $("#frm").attr("action", "${root}/search/searchDong").submit();
-   }
-   
-   
-   
-    </script>
-<!--  동적으로 콤보박스 바꾸기 END -->
+	});
+</script>
+
 </head>
+
+
 <body id="page-top">
 	<!-- Navigation-->
 	<nav
@@ -190,12 +87,10 @@
 					<h3 class="dropdown-header">Lists</h3>
 					<a class="dropdown-item" href="${root}/mvnotice">공지사항</a> <a
 						class="dropdown-item" href="#" id="todaynews">오늘의 뉴스</a> <a
-						class="dropdown-item" href="#" id="search">주변 탐방</a>
-					<c:if test="${userinfo ne null}">
-						<a class="dropdown-item"
-							href="${root }/interest/list?userid=${userinfo.userid}">관심 지역
-							둘러보기</a>
-					</c:if>
+						class="dropdown-item" href="#" id="search">주변 탐방</a> <a
+						class="dropdown-item"
+						href="${root }/interest/list?userid=${userinfo.userid}">관심 지역
+						둘러보기</a>
 				</div>
 			</div>
 
@@ -253,137 +148,68 @@
 			</div>
 			<div
 				class="sorting-filters text-center mb-20 d-flex justify-content-center">
-				<form class="form-inline" id="frm" method="post" action="">
-					<input type="hidden" id="code" name="act" value="" /> <input
-						type="hidden" id="userid" name="userid"
-						value="${userinfo.userid }" />
-					<div class="form-group md">
-						<select class="form-control" name="city" id="city">
-							<c:if test="${gugunlist eq null}">
-								<option value="all">도/광역시</option>
-								<option value="서울특별시">서울시</option>
-								<option value="인천광역시">인천시</option>
-								<option value="대전광역시">대전시</option>
-								<option value="대구광역시">대구시</option>
-								<option value="부산광역시">부산시</option>
-								<option value="울산광역시">울산시</option>
-								<option value="광주광역시">광주시</option>
-								<option value="경기도">경기도</option>
-								<option value="세종특별자치시">세종시</option>
-								<option value="강원도">강원도</option>
-								<option value="경상북도">경상북도</option>
-								<option value="경상남도">경상남도</option>
-								<option value="충청북도">충청북도</option>
-								<option value="충청남도">충청남도</option>
-								<option value="전라남도">전라남도</option>
-								<option value="전라북도">전라북도</option>
-								<option value="제주특별자치도">제주도</option>
-							</c:if>
-							<c:if test="${gugunlist ne null}">
-								<option value="${selectedsi}">${selectedsi}</option>
-							</c:if>
 
-						</select>
-					</div>
-					<div class="form-group md-1">
-						<select class="form-control" name="gugun" id="gu">
-							<c:if test="${donglist eq null}">
-								<option value="all">구/군</option>
-								<c:forEach var="guguns" items="${gugunlist}" varStatus="status">
-									<option value="${guguns.gugun}">${guguns.gugun}</option>
-								</c:forEach>
-							</c:if>
-							<c:if test="${donglist ne null }">
-								<option value="${selectedgu}">${selectedgu}</option>
-							</c:if>
-						</select>
-					</div>
-					<div class="form-group md-1">
-						<select class="form-control" name="dong" id="dong">
-							<option value="all">동</option>
-							<c:forEach var="dongs" items="${donglist}" varStatus="status">
-								<option value="${dongs.dong}">${dongs.dong}</option>
-							</c:forEach>
-						</select>
-					</div>
-					<div class="form-group md-1">
-						<input class="btn btn-warning" type="button" value="검색"
-							onclick="javascript:search()" />
-					</div>
-					<div class="form-group md-1">
-						<input class="btn btn-secondary" type="button"
-							onclick='interest()' value="관심 목록에 추가" />
-					</div>
-				</form>
 			</div>
 		</div>
+
 	</header>
 
-	<section class="container mt-5 mb-3">
+	<section class="container mt-5 mb-5">
+		<div class="row text-center align-items-center h-100"">
+			<div class="col-md-3 text-center"></div>
+			<div class="col-md-6 text-center">
+			<h3>${house.aptName}</h3> 상세정보
+				<table class="table table-striped">
 
-		<div class="row">
-			<div class="col-md-8">
-				<div class="boreder border-right-0">
-					<h4>검색된 아파트 정보</h4>
-					
-					<table class="table table-hover">
 					<tbody>
-                    <c:if test="${hlist ne null }">
-                        <c:forEach var = "house" items = "${hlist}">
-                        <tr>
-                        <td><a href="${root}/search/mvdetail/${house.no}">${house.aptName}</a><br>
-                        <img src="${root}/img/${house.img}" width="350" height="260" alt="no search image"><br>
-			            	위치 : ${house.dong} ${house.jibun}<br>
-			            	준공년도 : ${house.buildYear}
-				        
-                        </td>
-                        </tr>
-                        </c:forEach>
-                    </c:if>
-                    <c:if test="${hlist eq null }">
-                    	<tr><th>검색결과가 존재하지 않습니다.</th></tr>
-                    </c:if>
-                    </table>
-					
-				</div>
+					<c:if test="${house ne null }">
+						<tr>
+							<td>거래번호</td>
+							<td>${house.no}</td>
+						</tr>
+						<tr>
+							<td>법정동</td>
+							<td>${house.dong}</td>
+						</tr>
+						<tr>
+							<td>아파트명</td>
+							<td>${house.aptName}</td>
+						</tr>
+						<tr>
+							<td>거래량</td>
+							<td>${house.dealAmount}</td>
+						</tr>
+						<tr>
+							<td>건축년도</td>
+							<td>${house.buildYear}년</td>
+						</tr>
+						<tr>
+							<td>거래일</td>
+							<td>${house.dealYear}년 ${house.dealMonth }월 ${house.dealDay }일</td>
+						</tr>
+						<tr>
+							<td>면적</td>
+							<td>${house.area}</td>
+						</tr>
+						<tr>
+							<td>층수</td>
+							<td>${house.floor}</td>
+						</tr>
+						<tr>
+							<td>주소지</td>
+							<td>${house.jibun}</td>
+						</tr>
+					</c:if>
+					</tbody>
+				</table>
 			</div>
-
-			<div class="col-md-4">
-				<h4>최근 거래 정보</h4>
-				<table class="table table-hover">
-                    <tbody>
-                    <c:if test="${houselist ne null }">
-                        <c:forEach var = "house" items = "${houselist}">
-                        <tr>
-                        <td><a href="${root}/search/mvdealdetail/${house.no}">${house.aptName}</a><br>
-			                        거래금액: ${house.dealAmount} (만원)<br>
-			                        면적: ${house.area }<br>
-			                        등록일 : ${house.dealYear }.${house.dealMonth }.${house.dealDay}<br>
-				        <img src="${root}/img/${house.img}" width="160" height="120" alt="no search image">
-                        </td>
-                        </tr>
-                        </c:forEach>
-                        </c:if>
-                    <c:if test="${aptlist ne null }">
-                        <c:forEach var = "house" items = "${aptlist}">
-                        <tr>
-                        <td><a href="${root}/search/mvdealdetail/${house.no}">${house.aptName}</a><br>
-			                        거래금액: ${house.dealAmount} (만원)<br>
-			                        면적: ${house.area }<br>
-			                        등록일 : ${house.dealYear }.${house.dealMonth }.${house.dealDay }<br>
-				               <img src="${root}/img/${house.img}" width="160" height="120">
-                        </td>
-                        </tr>
-                        </c:forEach>
-                        </c:if>
-                    </tbody>
-                    </table>
-				
-				
-			</div>
+			<div class="col-md-3 text-center"></div>
 		</div>
 
-	</section>
+</section>
+
+
+
 
 	<!-- Footer-->
 	<footer class="footer">
@@ -451,6 +277,7 @@
 			</div>
 		</div>
 	</div>
+	<!-- The Modal -->
 	<!-- The Modal -->
 	<div class="modal" id="loginModal">
 		<div class="modal-dialog">
@@ -537,10 +364,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="toast">
-		<div class="toast-header">회원 탈퇴 확인</div>
-		<div class="toast-body">정말 탈퇴하시겠습니까 ?</div>
-	</div>
+
 
 	<!-- Bootstrap core JS-->
 	<script
@@ -555,7 +379,5 @@
 	<script src="assets/mail/contact_me.js"></script>
 	<!-- Core theme JS-->
 	<script src="js/scripts.js"></script>
-	
-	
 </body>
 </html>
