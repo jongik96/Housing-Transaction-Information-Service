@@ -156,7 +156,8 @@
 
 	<section class="container mt-5 mb-5">
 		<div class="row text-center align-items-center h-100"">
-			<div class="col-md-5 text-center">
+			<div class="col-md-3 text-center"></div>
+			<div class="col-md-6 text-center">
 			<h3>${house.aptName}</h3> 상세정보
 				<table class="table table-striped">
 
@@ -202,6 +203,7 @@
 					</tbody>
 				</table>
 			</div>
+			<div class="col-md-3 text-center"></div>
 		</div>
 
 </section>
