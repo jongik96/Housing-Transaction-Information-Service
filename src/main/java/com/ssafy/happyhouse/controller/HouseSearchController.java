@@ -28,6 +28,7 @@ import com.ssafy.happyhouse.dto.SubwayDto;
 import com.ssafy.happyhouse.dto.houseInfoDto;
 import com.ssafy.happyhouse.service.AddressService;
 import com.ssafy.happyhouse.service.HouseDealService;
+import com.ssafy.util.PageNavigation;
 
 @Controller
 @RequestMapping("/search")
@@ -62,9 +63,12 @@ public class HouseSearchController {
 	
 	@RequestMapping(value = "/searchDong", method ={RequestMethod.GET, RequestMethod.POST})
 	public String searchDong(@RequestParam Map<String, String> map, Model model) {
-
+	//	String spp = map.get("spp");
+		//map.put("spp", spp != null ? spp : "5");//sizePerPage
 		try{
 			List<HouseDealDto> list = houseDealService.getHouseDeal(map.get("dong"));
+		//	PageNavigation pageNavigation = houseDealService.makePageNavigation(map);
+		//	model.addAttribute("navigation", pageNavigation);
 			model.addAttribute("houselist", list);
 			model.addAttribute("dong", map.get("dong"));
 
@@ -155,13 +159,15 @@ public class HouseSearchController {
 		List<BusstopDto> busstoplist = houseDealService.getBusstopInfo(house);
 		List<PoliceDto> policelist = houseDealService.getPoliceInfo(house);
 		List<SubwayDto> subwaylist = houseDealService.getSubwayInfo(house);
-
+// 거래정보리스트 받아오기
+		List<HouseDealDto> list = houseDealService.getHouseDealNo(house);
+		model.addAttribute("houselist", list);
 		if(parklist.size() <=0) parklist = null;
 		if(marketlist.size() <=0) marketlist = null;
 		if(busstoplist.size() <=0) busstoplist = null;
 		if(policelist.size() <=0) policelist = null;
 		if(subwaylist.size() <=0) subwaylist = null;
-
+		model.addAttribute("house", house);
 		model.addAttribute("parklist", parklist);
 		model.addAttribute("marketlist", marketlist);
 		model.addAttribute("busstoplist", busstoplist);
@@ -171,7 +177,7 @@ public class HouseSearchController {
 			System.out.println(x.getBusstop_name());
 		}
 
-		model.addAttribute("house", house);
+		
 
 		return "aptdetail";
 	}
@@ -185,5 +191,28 @@ public class HouseSearchController {
 
 		return "dealdetail";
 	}
+	
+	@RequestMapping(value = "/mvstoredetail/{mname}", method = RequestMethod.GET)
+	public String mvstoredetail(@PathVariable("mname") String mname, Model model, HttpServletRequest response) {
+
+		MarketDto store = houseDealService.getStoreDetail(mname);
+		
+
+		model.addAttribute("store", store);
+
+		return "areadetail/storeDetail";
+	}
+	
+	@RequestMapping(value = "/mvsubwaydetail/{name}", method = RequestMethod.GET)
+	public String mvsubwaydetail(@PathVariable("name") String name, Model model, HttpServletRequest response) {
+
+		SubwayDto subway = houseDealService.getSubwayDetail(name);
+		
+
+		model.addAttribute("subway", subway);
+
+		return "areadetail/subwayDetail";
+	}
+
 
 }

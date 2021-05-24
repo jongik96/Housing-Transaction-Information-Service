@@ -1,10 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%--
-String root = request.getContextPath();
-pageContext.setAttribute("root", root);
---%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <c:set var="root" value="${pageContext.request.contextPath }" />
 <!DOCTYPE html>
 <html lang="en">
@@ -29,8 +26,6 @@ pageContext.setAttribute("root", root);
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="${root }/css/styles.css" rel="stylesheet" />
 <link href="${root }/css/custom.css" rel="stylesheet" />
-<script defer
-	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFhvndwTb7zd3egLZQsUDFAIaDJtZLhjo&callback=initMap&libraries=&v=weekly"></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -43,82 +38,39 @@ pageContext.setAttribute("root", root);
 }
 </style>
 <script type="text/javascript">
-        
-        //로그인 기능 연결
-		$(document).ready(function() {
-			$("#btn-login").click(function() {
-				if($("#loginId").val() == "") {
-					alert("아이디 입력!!!");
-					return;
-				} else if($("#loginPwd").val() == "") {
-					alert("비밀번호 입력!!!");
-					return;
-				} else {
-					$("#loginform").attr("action", "${root}/user/login").submit();
-				}
-			});
-			
-			//로그아웃 기능 연결
-			$('#logout').click(function(){
-			    alert('로그아웃되었습니다.');
-			    location.href = "${root}/user/logout";
-			})
-			
-			//회원정보삭제 기능 연결
-			$("#delete-btn").click(function() {			
-				let userid="<c:out value='${userinfo.userid}'/>";
-				location.href = "${root}/user/deleteMember?userid="+userid;
-			})
-			
-			
-			
-			$("#searchbyapt").click(function() {
-				let aptname = $("#myInput").val();
-				location.href = "${root}/search/aptSearch?aptname="+aptname;
-			});
-			$(".page-item").click(function() {
-				$("#pg").val(($(this).attr("data-pg")));
-				$("#pageform").attr("action", "${root}/search/searchDong").submit();
-			});
+	//로그인 기능 연결
+	$(document).ready(function() {
+		$("#btn-login").click(function() {
+			if ($("#loginId").val() == "") {
+				alert("아이디 입력!!!");
+				return;
+			} else if ($("#loginPwd").val() == "") {
+				alert("비밀번호 입력!!!");
+				return;
+			} else {
+				$("#loginform").attr("action", "${root}/user/login").submit();
+			}
 		});
-		</script>
-<script>
-   var blat = ${address.lat};
-   var blng = ${address.lng};
-   function initMap() {
-       var myLatLng = { lat: blat, lng: blng };
-       const map = new google.maps.Map(document.getElementById("map"), {
-         zoom: 14,
-         center: myLatLng,
-       });
-       $.ajax({
-           url : '${root }/search/searchMarker', //데이터베이스에 접근해 현재페이지로 결과를 뿌려줄 페이지
-           mathod : 'post',
-           data : {
-                 "apt": "${apt}", "dong":"${dong}"  //0 아파트 1 동검색 
-           },
-           datatype:"json",
-           contentType: 'application/json;charset=utf-8',
-           success : function(data){ //DB접근 후 가져온 데이터
-               $.each(data, function(index,item){
-            	    var marker = {  lat: item.lat*=1, lng: item.lng*=1}; // 그냥받으면 문자열이기때문에 형변환
-                   marker = new google.maps.Marker({
-                          position: marker, // 마커가 위치할 위도와 경도(변수)
-                          map: map,
-                          title: '검색 결과' // 마커에 마우스 포인트를 갖다댔을 때 뜨는 타이틀
-                   });
-                   var content = "아파트명 : "+item.aptName+"<br>아파트 가격 : "+item.dealAmount;
-                   var infowindow = new google.maps.InfoWindow({ content: content});
 
-                   google.maps.event.addListener(marker, "click", function() {
-                       infowindow.open(map,marker);
-                   }); 
-               });
-           }
-       })
-     }
-   
-	</script>
+		//로그아웃 기능 연결
+		$('#logout').click(function() {
+			alert('로그아웃되었습니다.');
+			location.href = "${root}/user/logout";
+		})
+
+		//회원정보삭제 기능 연결
+		$("#delete-btn").click(function() {
+			let userid = "<c:out value='${userinfo.userid}'/>";
+			location.href = "${root}/user/deleteMember?userid=" + userid;
+		})
+
+		$("#searchbyapt").click(function() {
+			let aptname = $("#myInput").val();
+			location.href = "${root}/search/aptSearch?aptname=" + aptname;
+		});
+	});
+</script>
+
 </head>
 
 
@@ -199,80 +151,44 @@ pageContext.setAttribute("root", root);
 
 			</div>
 		</div>
+
 	</header>
 
-	<!-- Map Section-->
-	<section class="page-section portfolio" id="portfolio">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-4"></div>
-				<div class="col-md-8">
-					<h3>${address.city} ${address.gugun} ${address.dong}</h3>
-				</div>
-				<div class="col-md-2"></div>
-			</div>
-			
-			<div class="row mt-5">
-				<div class="col-md-6">
-					<div class ="row">
-						<div id="map" style="width: 100%; height: 500px; margin: auto;"></div>
-					</div>
-					<div class="row mt-4">
-						<h5>해당 동 아파트 정보</h5>
-						<table class="table table-hover">
-							<tbody>
-							<c:if test="${hlist ne null }">
-								<c:forEach var="house" items="${hlist}">
-									<tr>
-										<td><a href="${root}/search/mvdetail/${house.no}">${house.aptName}</a><br>
-										</td>
-									</tr>
-								</c:forEach>
-							</c:if>
-						</table>
-						
-					</div>
-				</div>
-				
-				<div class="col-md-6">
-				<input type="hidden" name="pg" id="pg" value="1">
-					<table class="table table-hover">
-						<h4>거래 정보</h4>
-						<tbody>
-							<c:if test="${houselist ne null }">
-								<c:forEach var="house" items="${houselist}">
-									<tr>
-										<td>이름 : <a href="${root}/search/mvdealdetail/${house.no}">${house.aptName}</a><br>
-											거래금액: ${house.dealAmount}<br> 면적: ${house.area }<br>
-											등록일 : ${house.dealYear }.${house.dealMonth }.${house.dealDay }<br>
-											<img src="${root}/img/${house.img}" width="350" height="260"
-											alt="no search image">
-										</td>
-									</tr>
-								</c:forEach>
-							</c:if>
-							<c:if test="${aptlist ne null }">
-								<c:forEach var="house" items="${aptlist}">
-									<tr>
-										<td>이름 :<a href="${root}/search/mvdealdetail/${house.no}"> ${house.aptName}</a><br> 거래금액:
-											${house.dealAmount}<br> 면적: ${house.area }<br> 등록일
-											: ${house.dealYear }.${house.dealMonth }.${house.dealDay } <img
-											src="${root}/img/${house.img}" width="350" height="260">
-										</td>
-									</tr>
-								</c:forEach>
-							</c:if>
-							<tr>
-								<td>더이상의 검색 결과가 없습니다!</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-				
+	<section class="container mt-5 mb-5">
+		<div class="row text-center align-items-center h-100"">
+			<div class="col-md-3 text-center"></div>
+			<div class="col-md-6 text-center">
+			<h3>${subway.name}</h3> 상세정보
+				<table class="table table-striped">
 
+					<tbody>
+					<c:if test="${subway ne null }">
+						<tr>
+							<td>역 명</td>
+							<td>${subway.name}</td>
+						</tr>
+						<tr>
+							<td>호선</td>
+							<td>${subway.route_name}</td>
+						</tr>
+						<tr>
+							<td>구분</td>
+							<td>${subway.transfer}</td>
+						</tr>
+						<tr>
+							<td>전화번호</td>
+							<td>${subway.phone}</td>
+						</tr>
+					</c:if>
+					</tbody>
+				</table>
 			</div>
+			<div class="col-md-3 text-center"></div>
 		</div>
-	</section>
+
+</section>
+
+
 
 
 	<!-- Footer-->

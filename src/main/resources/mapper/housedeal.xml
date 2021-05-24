@@ -4,15 +4,24 @@
 
 <mapper namespace="com.ssafy.happyhouse.repo.HouseDealRepo">
 	
+
+	
  	<select id="getHouseDeal" parameterType="map" resultType="HouseDealDto">
 		select *, i.no as hno
 		from housedeal h right outer join houseinfo i on h.aptname=i.aptname
-		where h.dong = #{dongcode} and i.dong= #{dongcode} order by dealYear desc, dealMonth desc, dealDay desc
+		where h.dong = #{dongcode} and i.dong= #{dongcode} order by dealYear desc, dealMonth desc, dealDay desc limit 6
 	</select>
+	
+	<select id="getHouseDealNo" parameterType="HouseDealDto" resultType="HouseDealDto">
+		select * 
+		from housedeal h left outer join houseinfo i on h.AptName=i.AptName 
+		where h.aptname like concat('%', #{aptName}, '%') order by dealYear desc, dealMonth desc, dealDay desc limit 6
+	</select>
+	
 	<select id="getHouseDealDetail" parameterType="int" resultType="HouseDealDto">
 		select *
 		from housedeal h
-		where h.no = #{no}
+		where h.no = #{no} limit 6
 	</select>
 	
 	<select id="getAptDeal" parameterType="HouseDealDto" resultType="HouseDealDto">
@@ -31,6 +40,17 @@
 		FROM market <![CDATA[HAVING distance <= 1]]> ORDER BY distance LIMIT 20;
 	</select>
 	
+	<select id="getStoreDetail" parameterType="String" resultType="MarketDto">
+		SELECT *
+		FROM market
+		WHERE mname=#{mname}
+	</select>
+	<select id="getSubwayDetail" parameterType="String" resultType="SubwayDto">
+		SELECT *
+		FROM subwayinfo
+		WHERE name=#{name}
+	</select>
+	
 	<select id="getBusstopInfo" parameterType="HouseDealDto" resultType="BusstopDto">
 		SELECT *, (6371*acos(cos(radians(lat))*cos(radians(#{lat}))*cos(radians(#{lng})-radians(lit))+sin(radians(lat))*sin(radians(#{lat})))) AS distance 
 		FROM busstop <![CDATA[HAVING distance <= 1]]> ORDER BY distance LIMIT 20;
@@ -38,7 +58,7 @@
 	
 	<select id="getPoliceInfo" parameterType="HouseDealDto" resultType="PoliceDto">
 		SELECT *, (6371*acos(cos(radians(lat))*cos(radians(#{lat}))*cos(radians(#{lng})-radians(lit))+sin(radians(lat))*sin(radians(#{lat})))) AS distance 
-		FROM policeinfo <![CDATA[HAVING distance <= 2]]> ORDER BY distance LIMIT 20;
+		FROM policeinfo <![CDATA[HAVING distance <= 1]]> ORDER BY distance LIMIT 20;
 	</select>
 	
 	<select id="getSubwayInfo" parameterType="HouseDealDto" resultType="SubwayDto">
