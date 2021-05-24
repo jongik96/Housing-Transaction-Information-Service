@@ -424,7 +424,32 @@ function initMap() {
 					주변에 상권이 없어요
 					</c:if>
 				</div>
+				
 				<div class="col-md-6">
+					<c:if test="${busstoplist ne null }">
+						<h6>- 근처에 버스정류장이 있어요</h6><img src="https://maps.google.com/mapfiles/ms/icons/blue-dot.png">버스정류장
+						<table class="table">
+							<thead>
+								<tr>
+									<th>버정 이름</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach var="busstop" items="${busstoplist}">
+									<tr>
+										<td>${busstop.busstop_name}</td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+					</c:if>
+					<c:if test="${busstoplist eq null }">
+					주변에 버정 없어요
+					</c:if>
+					</div>
+			</div>
+			<div class="row mb-5">
+					<div class="col-md-4">
 					<c:if test="${parklist ne null }">
 						<h6>- 근처에 공원이 있어요</h6><img src="https://maps.google.com/mapfiles/ms/icons/green-dot.png">공원
 						<table class="table">
@@ -448,31 +473,6 @@ function initMap() {
 					주변에 공원이 없어요
 					</c:if>
 				</div>
-			
-			</div>
-			<div class="row mb-5">
-				<div class="col-md-4">
-					<c:if test="${busstoplist ne null }">
-						<h6>- 근처에 버스정류장이 있어요</h6><img src="https://maps.google.com/mapfiles/ms/icons/blue-dot.png">버스정류장
-						<table class="table">
-							<thead>
-								<tr>
-									<th>버정 이름</th>
-								</tr>
-							</thead>
-							<tbody>
-								<c:forEach var="busstop" items="${busstoplist}">
-									<tr>
-										<td>${busstop.busstop_name}</td>
-									</tr>
-								</c:forEach>
-							</tbody>
-						</table>
-					</c:if>
-					<c:if test="${busstoplist eq null }">
-					주변에 버정 없어요
-					</c:if>
-					</div>
 					<div class="col-md-4">
 					<c:if test="${policelist ne null }">
 						<h6>- 근처에 경찰서가 있어요</h6><img src="https://maps.google.com/mapfiles/ms/icons/purple-dot.png">경찰서
@@ -497,7 +497,7 @@ function initMap() {
 					</div>
 					<div class="col-md-4">
 					<c:if test="${subwaylist ne null }">
-						<h6>- 근처에 지하철역이 있어요</h6><img src="https://maps.google.com/mapfiles/ms/icons/orange-dot.png">경찰서
+						<h6>- 근처에 지하철역이 있어요</h6><img src="https://maps.google.com/mapfiles/ms/icons/orange-dot.png">지하철역
 						<table class="table">
 							<thead>
 								<tr>
@@ -507,7 +507,7 @@ function initMap() {
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach var="police" items="${subwaylist}">
+								<c:forEach var="subway" items="${subwaylist}">
 									<tr>
 										<td>${subway.name}</td>
 										<td>${subway.route_name}</td>

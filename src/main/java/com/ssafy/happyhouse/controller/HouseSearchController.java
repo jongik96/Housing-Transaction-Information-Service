@@ -160,7 +160,7 @@ public class HouseSearchController {
 		if(marketlist.size() <=0) marketlist = null;
 		if(busstoplist.size() <=0) busstoplist = null;
 		if(policelist.size() <=0) policelist = null;
-		if(subwaylist.size() <=0) policelist = null;
+		if(subwaylist.size() <=0) subwaylist = null;
 
 		model.addAttribute("parklist", parklist);
 		model.addAttribute("marketlist", marketlist);
