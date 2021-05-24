@@ -8,6 +8,7 @@ import com.ssafy.happyhouse.dto.HouseDealDto;
 import com.ssafy.happyhouse.dto.MarketDto;
 import com.ssafy.happyhouse.dto.ParkDto;
 import com.ssafy.happyhouse.dto.PoliceDto;
+import com.ssafy.happyhouse.dto.SubwayDto;
 import com.ssafy.happyhouse.dto.houseInfoDto;
 
 public interface HouseDealRepo {
@@ -21,4 +22,5 @@ public interface HouseDealRepo {
 	List<PoliceDto> getPoliceInfo(HouseDealDto house);
 	List<houseInfoDto> serchHouse(String aptname);
 	List<houseInfoDto> getHouseByRange(AddressDto address);
+	List<SubwayDto> getSubwayInfo(HouseDealDto house);
 }

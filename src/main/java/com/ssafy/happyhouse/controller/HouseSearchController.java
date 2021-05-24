@@ -24,6 +24,7 @@ import com.ssafy.happyhouse.dto.MarketDto;
 import com.ssafy.happyhouse.dto.ParkDto;
 import com.ssafy.happyhouse.dto.PoliceDto;
 import com.ssafy.happyhouse.dto.SchoolDto;
+import com.ssafy.happyhouse.dto.SubwayDto;
 import com.ssafy.happyhouse.dto.houseInfoDto;
 import com.ssafy.happyhouse.service.AddressService;
 import com.ssafy.happyhouse.service.HouseDealService;
@@ -138,6 +139,13 @@ public class HouseSearchController {
 		return result;
 	}
 
+	@ResponseBody
+	@RequestMapping(value = "/searchMarkersubway/{no}", method = RequestMethod.GET,consumes="application/json", produces = "application/json; charset=utf-8")
+	public List<SubwayDto> searchMarkersubway(@PathVariable int no, Model model, HttpServletResponse response) {
+		List<SubwayDto> result = houseDealService.getSubwayInfo(houseDealService.getHouseInfo(no)); 
+		return result;
+	}
+	
 	@RequestMapping(value = "/mvdetail/{no}", method = RequestMethod.GET)
 	public String mvdetail(@PathVariable("no") int no, Model model, HttpServletRequest response) {
 
@@ -146,16 +154,19 @@ public class HouseSearchController {
 		List<MarketDto> marketlist = houseDealService.getMarketInfo(house);
 		List<BusstopDto> busstoplist = houseDealService.getBusstopInfo(house);
 		List<PoliceDto> policelist = houseDealService.getPoliceInfo(house);
+		List<SubwayDto> subwaylist = houseDealService.getSubwayInfo(house);
 
 		if(parklist.size() <=0) parklist = null;
 		if(marketlist.size() <=0) marketlist = null;
 		if(busstoplist.size() <=0) busstoplist = null;
 		if(policelist.size() <=0) policelist = null;
+		if(subwaylist.size() <=0) policelist = null;
 
 		model.addAttribute("parklist", parklist);
 		model.addAttribute("marketlist", marketlist);
 		model.addAttribute("busstoplist", busstoplist);
 		model.addAttribute("policelist", policelist);
+		model.addAttribute("subwaylist", subwaylist);
 		for(BusstopDto x : busstoplist) {
 			System.out.println(x.getBusstop_name());
 		}
