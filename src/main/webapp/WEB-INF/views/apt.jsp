@@ -230,7 +230,7 @@ pageContext.setAttribute("root", root);
 								</c:forEach>
 							</c:if>
 						</table>
-						
+						${navigation.navigator}
 					</div>
 				</div>
 				

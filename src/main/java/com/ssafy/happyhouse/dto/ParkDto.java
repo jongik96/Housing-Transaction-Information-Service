@@ -6,8 +6,23 @@ public class ParkDto {
 	String parkdiv;
 	String address_st;
 	String address_jibun;
+	String facilities;
+	String facilities_comp;
 	float lat;
 	float lit;
+	
+	public String getFacilities_comp() {
+		return facilities_comp;
+	}
+	public void setFacilities_comp(String facilities_comp) {
+		this.facilities_comp = facilities_comp;
+	}
+	public String getFacilities() {
+		return facilities;
+	}
+	public void setFacilities(String facilities) {
+		this.facilities = facilities;
+	}
 	public String getManagement_id() {
 		return management_id;
 	}

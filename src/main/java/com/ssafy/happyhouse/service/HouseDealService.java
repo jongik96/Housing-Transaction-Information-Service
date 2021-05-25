@@ -1,8 +1,8 @@
 package com.ssafy.happyhouse.service;
 
 import java.util.List;
-import java.util.Map;
 
+import java.util.Map;
 import com.ssafy.happyhouse.dto.AddressDto;
 import com.ssafy.happyhouse.dto.BusstopDto;
 import com.ssafy.happyhouse.dto.HouseDealDto;
@@ -26,7 +26,11 @@ public interface HouseDealService {
 	HouseDealDto getHouseDealDetail(int no);
 	MarketDto getStoreDetail(String mname);
 	SubwayDto getSubwayDetail(String name);
+	ParkDto getParkDetail(String parkname);
+	
 	public List<houseInfoDto> serchHouse(String aptname);
 	public List<houseInfoDto> getHouseByRange(AddressDto address);
 	public PageNavigation makePageNavigation(Map<String, String> map) throws Exception;
+	//페이징되나싶어서만들어봄
+	public List<houseInfoDto> getHouseByRange(Map<String, String> map) throws Exception;
 }

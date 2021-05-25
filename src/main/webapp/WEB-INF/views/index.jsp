@@ -312,23 +312,6 @@
                 <!-- About Section Content-->
                 <div class="row" id = "cos_contents">
                 	<div class="col">
-                		<h3>광고</h3>
-                		<div class="divider-custom divider-light">
-                    	<div class="divider-custom-line"></div>
-                    	<div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                    	<div class="divider-custom-line"></div>
-                		</div>
-                		<img src = "${root }/assets/img/portfolio/cake.png" alt="" style="width:200px; height:200px"/>
-                	</div>
-                	<div class="col">
-                		<h3>주택 관련 기사</h3>
-                		<div class="divider-custom divider-light">
-                    	<div class="divider-custom-line"></div>
-                    	<div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                    	<div class="divider-custom-line"></div>
-                		</div>
-                	</div>
-                	<div class="col">
                 		<h3>오늘의 뉴스</h3>
                 		<div class="divider-custom divider-light">
                     	<div class="divider-custom-line"></div>

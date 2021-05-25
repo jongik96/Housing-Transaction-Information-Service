@@ -158,22 +158,37 @@
 		<div class="row text-center align-items-center h-100"">
 			<div class="col-md-3 text-center"></div>
 			<div class="col-md-6 text-center">
-			<h2>${store.mname}</h2>
+			<h2>${park.parkname}</h2>
 				<table class="table table-striped table-bordered">
 
 					<tbody>
-					<c:if test="${store ne null }">
+					<c:if test="${park ne null }">
 						<tr>
 							<td>가게이름</td>
-							<td>${store.mname}</td>
+							<td>${park.parkname}</td>
 						</tr>
 						<tr>
-							<td>업종</td>
-							<td>${store.type_big}</td>
+							<td>분류</td>
+							<td>${park.parkdiv}</td>
 						</tr>
 						<tr>
-							<td>메뉴</td>
-							<td>${store.type_lit}</td>
+							<td>스포츠시설</td>
+							<c:if test="${park.facilities ne null }">
+							<td>${park.facilities}</td>
+							</c:if>
+							<c:if test="${park.facilities eq null }">
+							<td>없음</td>
+							</c:if>
+							
+						</tr>
+						<tr>
+							<td>편의시설</td>
+							<c:if test="${park.facilities_comp ne null }">
+							<td>${park.facilities_comp}</td>
+							</c:if>
+							<c:if test="${park.facilities_comp eq null }">
+							<td>없음</td>
+							</c:if>
 						</tr>
 					</c:if>
 					</tbody>

@@ -63,12 +63,12 @@ public class HouseSearchController {
 	
 	@RequestMapping(value = "/searchDong", method ={RequestMethod.GET, RequestMethod.POST})
 	public String searchDong(@RequestParam Map<String, String> map, Model model) {
-	//	String spp = map.get("spp");
+		//String spp = map.get("spp");
 		//map.put("spp", spp != null ? spp : "5");//sizePerPage
 		try{
 			List<HouseDealDto> list = houseDealService.getHouseDeal(map.get("dong"));
-		//	PageNavigation pageNavigation = houseDealService.makePageNavigation(map);
-		//	model.addAttribute("navigation", pageNavigation);
+			//PageNavigation pageNavigation = houseDealService.makePageNavigation(map);
+			//model.addAttribute("navigation", pageNavigation);
 			model.addAttribute("houselist", list);
 			model.addAttribute("dong", map.get("dong"));
 
@@ -83,6 +83,7 @@ public class HouseSearchController {
 			AddressDto address = addressService.getBaseAddress(selected);
 			model.addAttribute("address", address);
 			
+			//apt.jsp에 띄우는 리스트
 			List<houseInfoDto> hlist = houseDealService.getHouseByRange(address);
 			
 			if(hlist.size()<=0) hlist = null;
@@ -181,6 +182,8 @@ public class HouseSearchController {
 
 		return "aptdetail";
 	}
+	
+	//거래 상세정보
 	@RequestMapping(value = "/mvdealdetail/{no}", method = RequestMethod.GET)
 	public String mvdealdetail(@PathVariable("no") int no, Model model, HttpServletRequest response) {
 
@@ -192,6 +195,7 @@ public class HouseSearchController {
 		return "dealdetail";
 	}
 	
+	// 상권상세정보
 	@RequestMapping(value = "/mvstoredetail/{mname}", method = RequestMethod.GET)
 	public String mvstoredetail(@PathVariable("mname") String mname, Model model, HttpServletRequest response) {
 
@@ -203,6 +207,7 @@ public class HouseSearchController {
 		return "areadetail/storeDetail";
 	}
 	
+	// 쟈철역 상세정보
 	@RequestMapping(value = "/mvsubwaydetail/{name}", method = RequestMethod.GET)
 	public String mvsubwaydetail(@PathVariable("name") String name, Model model, HttpServletRequest response) {
 
@@ -212,6 +217,18 @@ public class HouseSearchController {
 		model.addAttribute("subway", subway);
 
 		return "areadetail/subwayDetail";
+	}
+	
+	// 공원상세정보
+	@RequestMapping(value = "/mvparkdetail/{parkname}", method = RequestMethod.GET)
+	public String mvparkdetail(@PathVariable("parkname") String parkname, Model model, HttpServletRequest response) {
+
+		ParkDto park = houseDealService.getParkDetail(parkname);
+		
+
+		model.addAttribute("park", park);
+
+		return "areadetail/parkDetail";
 	}
 
 

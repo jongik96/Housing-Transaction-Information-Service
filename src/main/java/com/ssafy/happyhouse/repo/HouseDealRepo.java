@@ -19,8 +19,10 @@ public interface HouseDealRepo {
 	List<HouseDealDto> getAptDeal(String apt);
 	HouseDealDto getHouseInfo(int no); // 선택된 아파트 정보 받기
 	HouseDealDto getHouseDealDetail(int no); // 거래상세정보
-	MarketDto getStoreDetail(String mname);
-	SubwayDto getSubwayDetail(String name);
+	MarketDto getStoreDetail(String mname); //상권 상세정보
+	SubwayDto getSubwayDetail(String name); // 쟈철역 상세정보
+	ParkDto getParkDetail(String parkname);
+	
 	List<ParkDto> getParkInfo(HouseDealDto house); // 주변 공원 검색
 	List<MarketDto> getMarketInfo(HouseDealDto house); // 주변 상점 검색
 	List<BusstopDto> getBusstopInfo(HouseDealDto house); // 주변버정 검색
@@ -29,4 +31,7 @@ public interface HouseDealRepo {
 	List<houseInfoDto> getHouseByRange(AddressDto address);
 	List<SubwayDto> getSubwayInfo(HouseDealDto house);   // 주변 쟈철역
 	public int getTotalCountHouseDeal(Map<String, String> map) throws SQLException;
+	
+	// 테스트용
+	List<houseInfoDto> getHouseByRange(Map<String, Object> param);
 }

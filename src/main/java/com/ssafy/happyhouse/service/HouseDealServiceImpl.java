@@ -1,5 +1,6 @@
 package com.ssafy.happyhouse.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -75,6 +76,19 @@ public class HouseDealServiceImpl implements HouseDealService {
 	public List<houseInfoDto> getHouseByRange(AddressDto address) {
 		return sqlSession.getMapper(HouseDealRepo.class).getHouseByRange(address);
 	}
+	//페이징해볼려고만듬
+	@Override
+	public List<houseInfoDto> getHouseByRange(Map<String, String> map)throws Exception {
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("key", map.get("key") == null ? "" : map.get("key"));
+		param.put("word", map.get("word") == null ? "" : map.get("word"));
+		int currentPage = Integer.parseInt(map.get("pg"));
+		int sizePerPage = Integer.parseInt(map.get("spp"));
+		int start = (currentPage - 1) * sizePerPage;
+		param.put("start", start);
+		param.put("spp", sizePerPage);
+		return sqlSession.getMapper(HouseDealRepo.class).getHouseByRange(param);
+	}
 
 	@Override
 	public HouseDealDto getHouseDealDetail(int no) {
@@ -119,6 +133,11 @@ public class HouseDealServiceImpl implements HouseDealService {
 	@Override
 	public SubwayDto getSubwayDetail(String name) {
 		return sqlSession.getMapper(HouseDealRepo.class).getSubwayDetail(name);
+	}
+
+	@Override
+	public ParkDto getParkDetail(String parkname) {
+		return sqlSession.getMapper(HouseDealRepo.class).getParkDetail(parkname);
 	}
 
 	

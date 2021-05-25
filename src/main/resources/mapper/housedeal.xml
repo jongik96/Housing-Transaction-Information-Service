@@ -4,8 +4,6 @@
 
 <mapper namespace="com.ssafy.happyhouse.repo.HouseDealRepo">
 	
-
-	
  	<select id="getHouseDeal" parameterType="map" resultType="HouseDealDto">
 		select *, i.no as hno
 		from housedeal h right outer join houseinfo i on h.aptname=i.aptname
@@ -21,7 +19,7 @@
 	<select id="getHouseDealDetail" parameterType="int" resultType="HouseDealDto">
 		select *
 		from housedeal h
-		where h.no = #{no} limit 6
+		where h.no = #{no} limit 5
 	</select>
 	
 	<select id="getAptDeal" parameterType="HouseDealDto" resultType="HouseDealDto">
@@ -50,6 +48,12 @@
 		FROM subwayinfo
 		WHERE name=#{name}
 	</select>
+	<select id="getParkDetail" parameterType="String" resultType="ParkDto">
+		SELECT *
+		FROM parkinfo
+		WHERE parkname=#{parkname}
+	</select>
+	
 	
 	<select id="getBusstopInfo" parameterType="HouseDealDto" resultType="BusstopDto">
 		SELECT *, (6371*acos(cos(radians(lat))*cos(radians(#{lat}))*cos(radians(#{lng})-radians(lit))+sin(radians(lat))*sin(radians(#{lat})))) AS distance 

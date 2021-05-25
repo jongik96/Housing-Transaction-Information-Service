@@ -403,7 +403,7 @@ function initMap() {
 
 			<div class="row mb-5">
 				<div class="col-md-7">
-					<div id="map" style="width: 100%; height: 500px; margin: auto;"></div>
+					<div id="map" style="width: 100%; height: 700px; margin: auto;"></div>
 				</div>
 				<div class="col-md-5">
 				<table class="table table-hover">
@@ -513,7 +513,7 @@ function initMap() {
 							<tbody>
 								<c:forEach var="park" items="${parklist}">
 									<tr>
-										<td>${park.parkname}</td>
+										<td><a href="${root}/search/mvparkdetail/${park.parkname}">${park.parkname}</a></td>
 										<td>${park.parkdiv}</td>
 									</tr>
 								</c:forEach>

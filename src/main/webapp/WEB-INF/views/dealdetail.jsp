@@ -158,8 +158,8 @@
 		<div class="row text-center align-items-center h-100"">
 			<div class="col-md-3 text-center"></div>
 			<div class="col-md-6 text-center">
-			<h3>${house.aptName}</h3> 상세정보
-				<table class="table table-striped">
+			<h2>${house.aptName}</h2><br>
+				<table class="table table-striped table-bordered">
 
 					<tbody>
 					<c:if test="${house ne null }">
