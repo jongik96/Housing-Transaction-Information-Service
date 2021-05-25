@@ -37,99 +37,14 @@
 	margin-bottom: 10px;
 }
 </style>
-<script type="text/javascript">
-	//로그인 기능 연결
-	$(document).ready(function() {
-		$("#btn-login").click(function() {
-			if ($("#loginId").val() == "") {
-				alert("아이디 입력!!!");
-				return;
-			} else if ($("#loginPwd").val() == "") {
-				alert("비밀번호 입력!!!");
-				return;
-			} else {
-				$("#loginform").attr("action", "${root}/user/login").submit();
-			}
-		});
 
-		//로그아웃 기능 연결
-		$('#logout').click(function() {
-			alert('로그아웃되었습니다.');
-			location.href = "${root}/user/logout";
-		})
-
-		//회원정보삭제 기능 연결
-		$("#delete-btn").click(function() {
-			let userid = "<c:out value='${userinfo.userid}'/>";
-			location.href = "${root}/user/deleteMember?userid=" + userid;
-		})
-
-		$("#searchbyapt").click(function() {
-			let aptname = $("#myInput").val();
-			location.href = "${root}/search/aptSearch?aptname=" + aptname;
-		});
-	});
-</script>
 
 </head>
 
 
 <body id="page-top">
 	<!-- Navigation-->
-	<nav
-		class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top"
-		id="mainNav">
-		<div class="container">
-			<div class="dropdown">
-				<button type="button" class="btn btn-primary dropdown-toggle mr-3"
-					data-toggle="dropdown">More</button>
-				<div class="dropdown-menu">
-					<h3 class="dropdown-header">Lists</h3>
-					<a class="dropdown-item" href="${root}/mvnotice">공지사항</a> <a
-						class="dropdown-item" href="#" id="todaynews">오늘의 뉴스</a> <a
-						class="dropdown-item" href="#" id="search">주변 탐방</a> <a
-						class="dropdown-item"
-						href="${root }/interest/list?userid=${userinfo.userid}">관심 지역
-						둘러보기</a>
-				</div>
-			</div>
-
-
-			<a class="navbar-brand js-scroll-trigger" href="${root }/">Happy
-				House</a>
-			<button
-				class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded"
-				type="button" data-toggle="collapse" data-target="#navbarResponsive"
-				aria-controls="navbarResponsive" aria-expanded="false"
-				aria-label="Toggle navigation">
-				Menu <i class="fas fa-bars"></i>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarResponsive">
-				<ul class="navbar-nav ml-auto">
-					<c:if test="${ userinfo eq null }">
-						<li class="nav-item mx-0 mx-lg-1" id="signupli"><a
-							class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
-							id="signup" href="${root}/user/mvsignup">Sign up</a></li>
-						<li class="nav-item mx-0 mx-lg-1" id="signinli"><a
-							class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
-							data-toggle="modal" data-target="#loginModal">Sign in</a></li>
-					</c:if>
-					<c:if test="${ userinfo ne null }">
-						<li class="nav-item mx-0 mx-lg-1" id="logoutli"><a
-							class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
-							id="logout">Logout</a></li>
-						<li class="nav-item mx-0 mx-lg-1" id="userinfoli"><a
-							class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
-							data-toggle="modal" data-target="#infoModal">UserInfo</a></li>
-					</c:if>
-				</ul>
-
-				<input class="form-control" id="myInput" name="searchbyapt"
-					type="text" placeholder="Search.." style="width: 500px">
-				<button class="btn btn-warning" id="searchbyapt" type="submit">검색</button>
-			</div>
-		</div>
-	</nav>
+	<jsp:include page="../header.jsp"></jsp:include>
 	<!-- Masthead-->
 	<header class="masthead bg-primary text-white text-center">
 		<div class="container d-flex align-items-center flex-column">
@@ -189,34 +104,9 @@
 </section>
 
 
+<jsp:include page="${root}/footer.jsp"></jsp:include>
 
 
-	<!-- Footer-->
-	<footer class="footer">
-		<div class="container">
-			<div class="row">
-				<!-- Footer Location-->
-				<div class="col-lg-4 mb-5 mb-lg-0">
-					<h4 class="text-uppercase mb-4">Find Us</h4>
-					<p class="lead mb-0">
-						(SSAFY) 서울시 강남구 테헤란로 멀티스퀘어 <br /> 1544-9001 <br />
-						admin@ssafy.com
-					</p>
-				</div>
-			</div>
-		</div>
-	</footer>
-	<!-- Copyright Section-->
-	<div class="copyright py-4 text-center text-white">
-		<div class="container">
-			<small>Copyright © SSAFY. All rights reserved.</small>
-		</div>
-	</div>
-	<!-- Scroll to Top Button (Only visible on small and extra-small screen sizes)-->
-	<div class="scroll-to-top d-lg-none position-fixed">
-		<a class="js-scroll-trigger d-block text-center text-white rounded"
-			href="#page-top"><i class="fa fa-chevron-up"></i></a>
-	</div>
 	<!-- Portfolio Modals-->
 	<!-- Portfolio Modal 1-->
 	<div class="portfolio-modal modal fade" id="portfolioModal1"
@@ -258,106 +148,6 @@
 		</div>
 	</div>
 	<!-- The Modal -->
-	<!-- The Modal -->
-	<div class="modal" id="loginModal">
-		<div class="modal-dialog">
-			<div class="modal-content">
-
-				<!-- Modal Header -->
-				<div class="modal-header">
-					<h4 class="modal-title">Login</h4>
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-				</div>
-
-				<!-- Modal body -->
-				<div class="modal-body">
-					<form method="post" id="loginform" action="">
-						<div class="form-group">
-							<label for="loginId">ID:</label> <input type="text"
-								class="form-control" placeholder="Enter ID" id="userid"
-								name="userid">
-						</div>
-						<div class="form-group">
-							<label for="loginPwd">Password:</label> <input type="password"
-								class="form-control" placeholder="Enter password" id="userpwd"
-								name="userpwd">
-						</div>
-
-
-						<!-- Modal footer -->
-						<div class="modal-footer">
-							<button type="button" class="btn btn-primary" id="btn-login">LogIn</button>
-							<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-						</div>
-					</form>
-				</div>
-
-			</div>
-		</div>
-	</div>
-
-	<div class="modal fade" id="infoModal" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel" style="color: black">회원
-						정보 확인</h5>
-
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-
-				<div class="modal-body">
-					<h1 style="color: black">회원 정보 확인</h1>
-					<table class="table table-hover">
-						<tbody>
-							<tr>
-								<td>아이디 :</td>
-								<td>${ userinfo.userid }</td>
-							</tr>
-							<tr>
-								<td>비밀번호 :</td>
-								<td>${ userinfo.userpwd }</td>
-							</tr>
-							<tr>
-								<td>이름 :</td>
-								<td>${ userinfo.username }</td>
-							</tr>
-							<tr>
-								<td>e-mail :</td>
-								<td>${ userinfo.email }</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary"
-						data-dismiss="modal">확인</button>
-					<button type="button" class="btn btn-primary" id="modify-btn"
-						onclick="location.href='${root}/user/usermodify'">수정</button>
-					<button type="button" class="btn btn-danger" id="delete-btn">회원
-						탈퇴</button>
-				</div>
-			</div>
-		</div>
-	</div>
-
-
-	<!-- Bootstrap core JS-->
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
-	<!-- Third party plugin JS-->
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
-	<!-- Contact form JS-->
-	<script src="assets/mail/jqBootstrapValidation.js"></script>
-	<script src="assets/mail/contact_me.js"></script>
-	<!-- Core theme JS-->
-	<script src="js/scripts.js"></script>
+	
 </body>
 </html>

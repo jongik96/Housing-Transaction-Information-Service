@@ -174,9 +174,9 @@ public class HouseSearchController {
 		model.addAttribute("busstoplist", busstoplist);
 		model.addAttribute("policelist", policelist);
 		model.addAttribute("subwaylist", subwaylist);
-		for(BusstopDto x : busstoplist) {
-			System.out.println(x.getBusstop_name());
-		}
+//		for(BusstopDto x : busstoplist) {
+//			System.out.println(x.getBusstop_name());
+//		}
 
 		
 
