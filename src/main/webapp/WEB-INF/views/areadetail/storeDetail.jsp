@@ -73,20 +73,20 @@
 		<div class="row text-center align-items-center h-100"">
 			<div class="col-md-3 text-center"></div>
 			<div class="col-md-6 text-center">
-			<h2>${store.mname}</h2>
-				<table class="table table-striped table-bordered">
+			<h2><mark>${store.mname}</mark></h2>
+				<table class="table table-striped table-bordered table-hover">
 
 					<tbody>
 					<c:if test="${store ne null }">
-						<tr>
+						<tr class="table-primary">
 							<td>가게이름</td>
 							<td>${store.mname}</td>
 						</tr>
-						<tr>
+						<tr class="table-info">
 							<td>업종</td>
 							<td>${store.type_big}</td>
 						</tr>
-						<tr>
+						<tr class="table-success">
 							<td>메뉴</td>
 							<td>${store.type_lit}</td>
 						</tr>

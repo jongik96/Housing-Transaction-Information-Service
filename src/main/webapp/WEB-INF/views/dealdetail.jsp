@@ -74,44 +74,44 @@
 		<div class="row text-center align-items-center h-100"">
 			<div class="col-md-3 text-center"></div>
 			<div class="col-md-6 text-center">
-			<h2>${house.aptName}</h2><br>
-				<table class="table table-striped table-bordered">
+			<h2><mark>${house.aptName}</mark></h2><br>
+				<table class="table table-hover">
 
 					<tbody>
 					<c:if test="${house ne null }">
-						<tr>
+						<tr class="table-primary">
 							<td>거래번호</td>
 							<td>${house.no}</td>
 						</tr>
-						<tr>
+						<tr class="table-success">
 							<td>법정동</td>
 							<td>${house.dong}</td>
 						</tr>
-						<tr>
+						<tr class="table-info">
 							<td>아파트명</td>
 							<td>${house.aptName}</td>
 						</tr>
-						<tr>
+						<tr class="table-warning">
 							<td>거래량</td>
 							<td>${house.dealAmount}</td>
 						</tr>
-						<tr>
+						<tr class="table-primary">
 							<td>건축년도</td>
 							<td>${house.buildYear}년</td>
 						</tr>
-						<tr>
+						<tr class="table-success">
 							<td>거래일</td>
 							<td>${house.dealYear}년 ${house.dealMonth }월 ${house.dealDay }일</td>
 						</tr>
-						<tr>
+						<tr class="table-info">
 							<td>면적</td>
 							<td>${house.area}</td>
 						</tr>
-						<tr>
+						<tr class="table-warning">
 							<td>층수</td>
 							<td>${house.floor}</td>
 						</tr>
-						<tr>
+						<tr class="table-primary">
 							<td>주소지</td>
 							<td>${house.jibun}</td>
 						</tr>

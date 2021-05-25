@@ -73,20 +73,20 @@
 		<div class="row text-center align-items-center h-100"">
 			<div class="col-md-3 text-center"></div>
 			<div class="col-md-6 text-center">
-			<h2>${park.parkname}</h2>
-				<table class="table table-striped table-bordered">
+			<h2><mark>${park.parkname}</mark></h2>
+				<table class="table table-striped table-bordered table-hover">
 
 					<tbody>
 					<c:if test="${park ne null }">
-						<tr>
-							<td>가게이름</td>
+						<tr class="table-primary">
+							<td>공원이름</td>
 							<td>${park.parkname}</td>
 						</tr>
-						<tr>
+						<tr class="table-success">
 							<td>분류</td>
 							<td>${park.parkdiv}</td>
 						</tr>
-						<tr>
+						<tr class="table-info">
 							<td>스포츠시설</td>
 							<c:if test="${park.facilities ne null }">
 							<td>${park.facilities}</td>
@@ -96,7 +96,7 @@
 							</c:if>
 							
 						</tr>
-						<tr>
+						<tr class="table-warning">
 							<td>편의시설</td>
 							<c:if test="${park.facilities_comp ne null }">
 							<td>${park.facilities_comp}</td>
