@@ -251,7 +251,7 @@
 								<div class="divider-custom">
 									<div class="divider-custom-line"></div>
 									<div class="divider-custom-icon">
-										<i class="fas fa-star"></i>
+										<i class="fas fa-home"></i>
 									</div>
 									<div class="divider-custom-line"></div>
 								</div>

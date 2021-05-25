@@ -151,19 +151,7 @@
 </div>
 
 	<!-- Footer-->
-	<footer class="footer">
-		<div class="container">
-			<div class="row">
-				<!-- Footer Location-->
-				<div class="col-lg-4 mb-5 mb-lg-0">
-					<h4 class="text-uppercase mb-4">Find Us</h4>
-					<p class="lead mb-0">
-						(SSAFY) 서울시 강남구 테헤란로 멀티스퀘어 <br /> 1544-9001 <br />
-						admin@ssafy.com
-					</p>
-				</div>
-			</div>
-		</div>
+	<jsp:include page="footer.jsp"></jsp:include>
 		<!-- Modal -->
 		<div class="modal fade" id="noticeModal" tabindex="-1" role="dialog"
 			aria-labelledby="exampleModalLabel" aria-hidden="true">

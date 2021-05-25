@@ -95,7 +95,7 @@ pageContext.setAttribute("root", root);
   					<h3 class="dropdown-header">Lists</h3>
     				<a class="dropdown-item" href="${root}/article/mvnotice">공지사항</a>
 					<a class="dropdown-item" href="#" id="todaynews">오늘의 뉴스</a>
-    				<a class="dropdown-item" href="#" id="search">주변 탐방</a>
+    				
     				<a class="dropdown-item" href="${root }/interest/list?userid=${userinfo.userid}">관심 지역 둘러보기</a>
   					</div>
 			</div>
@@ -135,7 +135,7 @@ pageContext.setAttribute("root", root);
 			<div class="divider-custom divider-light">
 				<div class="divider-custom-line"></div>
 				<div class="divider-custom-icon">
-					<i class="fas fa-star"></i>
+					<i class="fas fa-home"></i>
 				</div>
 				<div class="divider-custom-line"></div>
 			</div>
@@ -175,20 +175,7 @@ pageContext.setAttribute("root", root);
 
 
 	<!-- Footer-->
-	<footer class="footer">
-		<div class="container">
-			<div class="row">
-				<!-- Footer Location-->
-				<div class="col-lg-4 mb-5 mb-lg-0">
-					<h4 class="text-uppercase mb-4">Find Us</h4>
-					<p class="lead mb-0">
-						(SSAFY) 서울시 강남구 테헤란로 멀티스퀘어 <br /> 1544-9001 <br />
-						admin@ssafy.com
-					</p>
-				</div>
-			</div>
-		</div>
-	</footer>
+	<jsp:include page="footer.jsp"></jsp:include>
 	<!-- Copyright Section-->
 	<div class="copyright py-4 text-center text-white">
 		<div class="container">
