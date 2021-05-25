@@ -1,7 +1,8 @@
 package com.ssafy.happyhouse.service;
 
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
@@ -18,6 +19,7 @@ import com.ssafy.happyhouse.dto.PoliceDto;
 import com.ssafy.happyhouse.dto.SubwayDto;
 import com.ssafy.happyhouse.dto.houseInfoDto;
 import com.ssafy.happyhouse.repo.HouseDealRepo;
+import com.ssafy.util.PageNavigation;
 
 @Service
 public class HouseDealServiceImpl implements HouseDealService {
@@ -74,6 +76,19 @@ public class HouseDealServiceImpl implements HouseDealService {
 	public List<houseInfoDto> getHouseByRange(AddressDto address) {
 		return sqlSession.getMapper(HouseDealRepo.class).getHouseByRange(address);
 	}
+	//페이징해볼려고만듬
+	@Override
+	public List<houseInfoDto> getHouseByRange(Map<String, String> map)throws Exception {
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("key", map.get("key") == null ? "" : map.get("key"));
+		param.put("word", map.get("word") == null ? "" : map.get("word"));
+		int currentPage = Integer.parseInt(map.get("pg"));
+		int sizePerPage = Integer.parseInt(map.get("spp"));
+		int start = (currentPage - 1) * sizePerPage;
+		param.put("start", start);
+		param.put("spp", sizePerPage);
+		return sqlSession.getMapper(HouseDealRepo.class).getHouseByRange(param);
+	}
 
 	@Override
 	public HouseDealDto getHouseDealDetail(int no) {
@@ -83,6 +98,46 @@ public class HouseDealServiceImpl implements HouseDealService {
 	@Override
 	public List<SubwayDto> getSubwayInfo(HouseDealDto house) {
 		return sqlSession.getMapper(HouseDealRepo.class).getSubwayInfo(house);
+	}
+
+	@Override
+	public List<HouseDealDto> getHouseDealNo(HouseDealDto house) {
+		return sqlSession.getMapper(HouseDealRepo.class).getHouseDealNo(house);
+	}
+
+	@Override
+	public PageNavigation makePageNavigation(Map<String, String> map) throws Exception {
+		int naviSize = 10;
+		int currentPage = Integer.parseInt(map.get("pg"));
+		int sizePerPage = Integer.parseInt(map.get("spp"));
+		PageNavigation pageNavigation = new PageNavigation();
+		pageNavigation.setCurrentPage(currentPage);
+		pageNavigation.setNaviSize(naviSize);
+		int totalCount = sqlSession.getMapper(HouseDealRepo.class).getTotalCountHouseDeal(map);
+		pageNavigation.setTotalCount(totalCount);
+		int totalPageCount = (totalCount - 1) / sizePerPage + 1;
+		pageNavigation.setTotalPageCount(totalPageCount);
+		boolean startRange = currentPage <= naviSize;
+		pageNavigation.setStartRange(startRange);
+		boolean endRange = (totalPageCount - 1) / naviSize * naviSize < currentPage;
+		pageNavigation.setEndRange(endRange);
+		pageNavigation.makeNavigator();
+		return pageNavigation;
+	}
+
+	@Override
+	public MarketDto getStoreDetail(String mname) {
+		return sqlSession.getMapper(HouseDealRepo.class).getStoreDetail(mname);
+	}
+
+	@Override
+	public SubwayDto getSubwayDetail(String name) {
+		return sqlSession.getMapper(HouseDealRepo.class).getSubwayDetail(name);
+	}
+
+	@Override
+	public ParkDto getParkDetail(String parkname) {
+		return sqlSession.getMapper(HouseDealRepo.class).getParkDetail(parkname);
 	}
 
 	

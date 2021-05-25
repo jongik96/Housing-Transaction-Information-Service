@@ -182,7 +182,7 @@
   					<h3 class="dropdown-header">Lists</h3>
     				<a class="dropdown-item" href="${root}/mvnotice">공지사항</a>
 					<a class="dropdown-item" href="#" id="todaynews">오늘의 뉴스</a>
-    				<a class="dropdown-item" href="#" id="search">주변 탐방</a>
+    			
     				<c:if test="${userinfo ne null}">
     				<a class="dropdown-item" href="${root }/interest/list?userid=${userinfo.userid}">관심 지역 둘러보기</a>
     				</c:if>
@@ -221,7 +221,7 @@
                 <!-- Icon Divider-->
                 <div class="divider-custom divider-light">
                     <div class="divider-custom-line"></div>
-                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                    <div class="divider-custom-icon"><i class="fas fa-home"></i></div>
                     <div class="divider-custom-line"></div>
                 </div>
                 <div class="sorting-filters text-center mb-20 d-flex justify-content-center">
@@ -312,23 +312,6 @@
                 <!-- About Section Content-->
                 <div class="row" id = "cos_contents">
                 	<div class="col">
-                		<h3>광고</h3>
-                		<div class="divider-custom divider-light">
-                    	<div class="divider-custom-line"></div>
-                    	<div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                    	<div class="divider-custom-line"></div>
-                		</div>
-                		<img src = "${root }/assets/img/portfolio/cake.png" alt="" style="width:200px; height:200px"/>
-                	</div>
-                	<div class="col">
-                		<h3>주택 관련 기사</h3>
-                		<div class="divider-custom divider-light">
-                    	<div class="divider-custom-line"></div>
-                    	<div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                    	<div class="divider-custom-line"></div>
-                		</div>
-                	</div>
-                	<div class="col">
                 		<h3>오늘의 뉴스</h3>
                 		<div class="divider-custom divider-light">
                     	<div class="divider-custom-line"></div>
@@ -341,23 +324,8 @@
         </section>
         
         <!-- Footer-->
-        <footer class="footer">
-            <div class="container">
-                <div class="row">
-                    <!-- Footer Location-->
-                    <div class="col-lg-4 mb-5 mb-lg-0">
-                        <h4 class="text-uppercase mb-4">Find Us</h4>
-                        <p class="lead mb-0">
-                            (SSAFY) 서울시 강남구 테헤란로 멀티스퀘어
-                            <br />
-                            1544-9001
-                            <br />
-                            admin@ssafy.com
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </footer>
+        <jsp:include page="footer.jsp"></jsp:include>
+
         <!-- Copyright Section-->
         <div class="copyright py-4 text-center text-white">
             <div class="container"><small>Copyright © SSAFY. All rights reserved.</small></div>

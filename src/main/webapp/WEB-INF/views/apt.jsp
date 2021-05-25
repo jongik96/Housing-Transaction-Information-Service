@@ -76,6 +76,7 @@ pageContext.setAttribute("root", root);
 				let aptname = $("#myInput").val();
 				location.href = "${root}/search/aptSearch?aptname="+aptname;
 			});
+
 		});
 		</script>
 <script>
@@ -186,7 +187,7 @@ pageContext.setAttribute("root", root);
 			<div class="divider-custom divider-light">
 				<div class="divider-custom-line"></div>
 				<div class="divider-custom-icon">
-					<i class="fas fa-star"></i>
+					<i class="fas fa-home"></i>
 				</div>
 				<div class="divider-custom-line"></div>
 			</div>
@@ -226,10 +227,12 @@ pageContext.setAttribute("root", root);
 								</c:forEach>
 							</c:if>
 						</table>
+						${navigation.navigator}
 					</div>
 				</div>
 				
 				<div class="col-md-6">
+				<input type="hidden" name="pg" id="pg" value="1">
 					<table class="table table-hover">
 						<h4>거래 정보</h4>
 						<tbody>
@@ -270,20 +273,7 @@ pageContext.setAttribute("root", root);
 
 
 	<!-- Footer-->
-	<footer class="footer">
-		<div class="container">
-			<div class="row">
-				<!-- Footer Location-->
-				<div class="col-lg-4 mb-5 mb-lg-0">
-					<h4 class="text-uppercase mb-4">Find Us</h4>
-					<p class="lead mb-0">
-						(SSAFY) 서울시 강남구 테헤란로 멀티스퀘어 <br /> 1544-9001 <br />
-						admin@ssafy.com
-					</p>
-				</div>
-			</div>
-		</div>
-	</footer>
+	<jsp:include page="footer.jsp"></jsp:include>
 	<!-- Copyright Section-->
 	<div class="copyright py-4 text-center text-white">
 		<div class="container">

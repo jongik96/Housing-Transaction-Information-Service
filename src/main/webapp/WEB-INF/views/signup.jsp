@@ -134,7 +134,7 @@ pageContext.setAttribute("root", root);
                 <!-- Icon Divider-->
                 <div class="divider-custom">
                     <div class="divider-custom-line"></div>
-                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                    <div class="divider-custom-icon"><i class="fas fa-home"></i></div>
                     <div class="divider-custom-line"></div>
                 </div>
                 <!-- Sign up Section Form-->
@@ -189,23 +189,7 @@ pageContext.setAttribute("root", root);
 		
         
         <!-- Footer-->
-        <footer class="footer">
-            <div class="container">
-                <div class="row">
-                    <!-- Footer Location-->
-                    <div class="col-lg-4 mb-5 mb-lg-0">
-                        <h4 class="text-uppercase mb-4">Find Us</h4>
-                        <p class="lead mb-0">
-                            (SSAFY) 서울시 강남구 테헤란로 멀티스퀘어
-                            <br />
-                            1544-9001
-                            <br />
-                            admin@ssafy.com
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </footer>
+       <jsp:include page="footer.jsp"></jsp:include>
         
             <!-- The Modal -->
 	<div class="modal" id="loginModal">

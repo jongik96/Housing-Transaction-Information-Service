@@ -142,7 +142,7 @@
 			<div class="divider-custom divider-light">
 				<div class="divider-custom-line"></div>
 				<div class="divider-custom-icon">
-					<i class="fas fa-home"></i>
+					<i class="fas fa-star"></i>
 				</div>
 				<div class="divider-custom-line"></div>
 			</div>
@@ -158,46 +158,37 @@
 		<div class="row text-center align-items-center h-100"">
 			<div class="col-md-3 text-center"></div>
 			<div class="col-md-6 text-center">
-			<h2>${house.aptName}</h2><br>
+			<h2>${park.parkname}</h2>
 				<table class="table table-striped table-bordered">
 
 					<tbody>
-					<c:if test="${house ne null }">
+					<c:if test="${park ne null }">
 						<tr>
-							<td>거래번호</td>
-							<td>${house.no}</td>
+							<td>가게이름</td>
+							<td>${park.parkname}</td>
 						</tr>
 						<tr>
-							<td>법정동</td>
-							<td>${house.dong}</td>
+							<td>분류</td>
+							<td>${park.parkdiv}</td>
 						</tr>
 						<tr>
-							<td>아파트명</td>
-							<td>${house.aptName}</td>
+							<td>스포츠시설</td>
+							<c:if test="${park.facilities ne null }">
+							<td>${park.facilities}</td>
+							</c:if>
+							<c:if test="${park.facilities eq null }">
+							<td>없음</td>
+							</c:if>
+							
 						</tr>
 						<tr>
-							<td>거래량</td>
-							<td>${house.dealAmount}</td>
-						</tr>
-						<tr>
-							<td>건축년도</td>
-							<td>${house.buildYear}년</td>
-						</tr>
-						<tr>
-							<td>거래일</td>
-							<td>${house.dealYear}년 ${house.dealMonth }월 ${house.dealDay }일</td>
-						</tr>
-						<tr>
-							<td>면적</td>
-							<td>${house.area}</td>
-						</tr>
-						<tr>
-							<td>층수</td>
-							<td>${house.floor}</td>
-						</tr>
-						<tr>
-							<td>주소지</td>
-							<td>${house.jibun}</td>
+							<td>편의시설</td>
+							<c:if test="${park.facilities_comp ne null }">
+							<td>${park.facilities_comp}</td>
+							</c:if>
+							<c:if test="${park.facilities_comp eq null }">
+							<td>없음</td>
+							</c:if>
 						</tr>
 					</c:if>
 					</tbody>
@@ -212,7 +203,20 @@
 
 
 	<!-- Footer-->
-	<jsp:include page="footer.jsp"></jsp:include>
+	<footer class="footer">
+		<div class="container">
+			<div class="row">
+				<!-- Footer Location-->
+				<div class="col-lg-4 mb-5 mb-lg-0">
+					<h4 class="text-uppercase mb-4">Find Us</h4>
+					<p class="lead mb-0">
+						(SSAFY) 서울시 강남구 테헤란로 멀티스퀘어 <br /> 1544-9001 <br />
+						admin@ssafy.com
+					</p>
+				</div>
+			</div>
+		</div>
+	</footer>
 	<!-- Copyright Section-->
 	<div class="copyright py-4 text-center text-white">
 		<div class="container">
@@ -247,7 +251,7 @@
 								<div class="divider-custom">
 									<div class="divider-custom-line"></div>
 									<div class="divider-custom-icon">
-										<i class="fas fa-star"></i>
+										<i class="fas fa-home"></i>
 									</div>
 									<div class="divider-custom-line"></div>
 								</div>
