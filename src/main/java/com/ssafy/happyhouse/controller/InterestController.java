@@ -35,7 +35,7 @@ public class InterestController {
 		return "index";
 	}
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public String listPage(@Param("userid") String userid,Model model) {
+	public String listPage(@Param("userid") String userid, Model model) {
 		try {
 			model.addAttribute("interestlist",interestService.getInterest(userid));
 		} catch (Exception e) {
