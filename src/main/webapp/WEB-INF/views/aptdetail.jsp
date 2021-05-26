@@ -36,23 +36,35 @@
 
 <script type="text/javascript" src="${root }/main.js"></script>
 <script type="text/javascript" src="${root }/area.js"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 <script
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<script type="text/javascript"
+	src="https://www.gstatic.com/charts/loader.js"></script>
+<link rel="stylesheet"
+	href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css" />
 <style>
 #map {
 	height: 500px;
 	margin-bottom: 10px;
 }
 </style>
+
+</head>
+
 <script>
+
 
 function initMap() {
     var myLatLng = { lat: ${house.lat}, lng: ${house.lng} };
     const map = new google.maps.Map(document.getElementById("map"), {
-      zoom: 16,
+    	 mapId: "8e0a97af9386fef",
+    	zoom: 16,
       center: myLatLng,
+      
     });
-    
+    const transitLayer = new google.maps.TransitLayer();
+    transitLayer.setMap(map);
     $.ajax({ // 주변 공원 데이터를 받아온다
         url : '${root}/search/searchMarkerPark/${house.no}', //데이터베이스에 접근해 현재페이지로 결과를 뿌려줄 페이지
         method : 'get',
@@ -61,38 +73,43 @@ function initMap() {
         contentType: 'application/json;charset=utf-8',
         success : function(data){ //DB접근 후 가져온 데이터
             $.each(data, function(index,item){
-         	    var marker = {  lat: item.lat*=1, lng: item.lit*=1 }; // 그냥받으면 문자열이기때문에 형변환
-                marker = new google.maps.Marker({
+            	var parkmarker = {  lat: item.lat*=1, lng: item.lit*=1 }; // 그냥받으면 문자열이기때문에 형변환
+         	   
+         	    parkmarker = new google.maps.Marker({
                 	  icon:
                 	   {
                 		   url: "http://maps.google.com/mapfiles/kml/pal2/icon4.png"
                 	   },
-                       position: marker, // 마커가 위치할 위도와 경도(변수)
+                       position: parkmarker, // 마커가 위치할 위도와 경도(변수)
                        map: map,
+                       animation: google.maps.Animation.DROP,
                       
                        title: '검색 결과' // 마커에 마우스 포인트를 갖다댔을 때 뜨는 타이틀
                 });
+                
                 var content = "공원명 : "+item.parkname+"<br>공원분류 : "+ item.parkdiv; // 말풍선 안에 들어갈 내용
                 // 마커를 클릭했을 때의 이벤트. 말풍선 뿅~
                 var infowindow = new google.maps.InfoWindow({content: content});
            
-                google.maps.event.addListener(marker, "click", function() {
+                google.maps.event.addListener(parkmarker, "click", function() {
                 	
-                    infowindow.open(map,marker);
+                    infowindow.open(map,parkmarker);
                 }); 
-                if (marker) {
-                    marker.addListener('click', function() {
+                if (parkmarker) {
+                	parkmarker.addListener('click', function() {
                         
                         //중심 위치를 클릭된 마커의 위치로 변경
                         map.setCenter(this.getPosition());
  
                         //마커 클릭 시의 줌 변화
                         map.setZoom(17);
+                        
                     });
                 }
             });
         }
     })
+
     
     $.ajax({ // 주변 상점 데이터를 받아온다
         url : '${root}/search/searchMarkerMarket/${house.no}', //데이터베이스에 접근해 현재페이지로 결과를 뿌려줄 페이지
@@ -102,27 +119,30 @@ function initMap() {
         contentType: 'application/json;charset=utf-8',
         success : function(data){ //DB접근 후 가져온 데이터
             $.each(data, function(index,item){
-         	    var marker = {  lat: item.lat*=1, lng: item.lit*=1 }; // 그냥받으면 문자열이기때문에 형변환
+         	    var marketmarker = {  lat: item.lat*=1, lng: item.lit*=1 }; // 그냥받으면 문자열이기때문에 형변환
+         	    
          	    var storeimage = new google.maps.MarkerImage("/image/policeimg.png", null, null, null, new google.maps.Size(12,20));
-         	   marker = new google.maps.Marker({
+         	   marketmarker = new google.maps.Marker({
                 	 icon: 
                 	 {
                 		
               		  url: "http://maps.google.com/mapfiles/kml/pal2/icon32.png"
               	 },
-                       position: marker, // 마커가 위치할 위도와 경도(변수)
+                       position: marketmarker, // 마커가 위치할 위도와 경도(변수)
                        map: map,
+                       animation: google.maps.Animation.DROP,
                        title: '검색 결과' // 마커에 마우스 포인트를 갖다댔을 때 뜨는 타이틀
                 });
+         	  	
                 var content = " - "+item.mname+"<br>분류 "+ item.type_lit; // 말풍선 안에 들어갈 내용
                 // 마커를 클릭했을 때의 이벤트. 말풍선 뿅~
                 var infowindow = new google.maps.InfoWindow({content: content});
 
-                google.maps.event.addListener(marker, "click", function() {
-                    infowindow.open(map,marker);
+                google.maps.event.addListener(marketmarker, "click", function() {
+                    infowindow.open(map,marketmarker);
                 }); 
-                if (marker) {
-                    marker.addListener('click', function() {
+                if (marketmarker) {
+                	marketmarker.addListener('click', function() {
                         
                         //중심 위치를 클릭된 마커의 위치로 변경
                         map.setCenter(this.getPosition());
@@ -131,6 +151,7 @@ function initMap() {
                         map.setZoom(17);
                     });
                 }
+              
             });
         }
     })
@@ -143,14 +164,15 @@ function initMap() {
         contentType: 'application/json;charset=utf-8',
         success : function(data){ //DB접근 후 가져온 데이터
             $.each(data, function(index,item){
-         	    var marker = {  lat: item.lat*=1, lng: item.lit*=1 }; // 그냥받으면 문자열이기때문에 형변환
-                marker = new google.maps.Marker({
+         	    var busmarker = {  lat: item.lat*=1, lng: item.lit*=1 }; // 그냥받으면 문자열이기때문에 형변환
+                busmarker = new google.maps.Marker({
                 	  icon:
                 	   {
                 		   url: "http://maps.google.com/mapfiles/kml/pal4/icon54.png"
                 	   },
-                       position: marker, // 마커가 위치할 위도와 경도(변수)
+                       position: busmarker, // 마커가 위치할 위도와 경도(변수)
                        map: map,
+                       animation: google.maps.Animation.DROP,
                       
                        title: '검색 결과' // 마커에 마우스 포인트를 갖다댔을 때 뜨는 타이틀
                 });
@@ -158,11 +180,11 @@ function initMap() {
                 // 마커를 클릭했을 때의 이벤트. 말풍선 뿅~
                 var infowindow = new google.maps.InfoWindow({content: content});
 
-                google.maps.event.addListener(marker, "click", function() {
-                    infowindow.open(map,marker);
+                google.maps.event.addListener(busmarker, "click", function() {
+                    infowindow.open(map,busmarker);
                 }); 
-                if (marker) {
-                    marker.addListener('click', function() {
+                if (busmarker) {
+                	busmarker.addListener('click', function() {
                         
                         //중심 위치를 클릭된 마커의 위치로 변경
                         map.setCenter(this.getPosition());
@@ -186,16 +208,17 @@ function initMap() {
         contentType: 'application/json;charset=utf-8',
         success : function(data){ //DB접근 후 가져온 데이터
             $.each(data, function(index,item){
-         	    var marker = {  lat: item.lat*=1, lng: item.lit*=1 }; // 그냥받으면 문자열이기때문에 형변환
+         	    var policemarker = {  lat: item.lat*=1, lng: item.lit*=1 }; // 그냥받으면 문자열이기때문에 형변환
          	   
-         	    marker = new google.maps.Marker({
+         	    policemarker = new google.maps.Marker({
          	    	
                 	  icon: 
                 	 	{
                 		   url: "http://maps.google.com/mapfiles/kml/pal2/icon8.png"
                 	   },
-                       position: marker, // 마커가 위치할 위도와 경도(변수)
+                       position: policemarker, // 마커가 위치할 위도와 경도(변수)
                        map: map,
+                       animation: google.maps.Animation.DROP,
                       
                        title: '검색 결과' // 마커에 마우스 포인트를 갖다댔을 때 뜨는 타이틀
                 });
@@ -204,10 +227,10 @@ function initMap() {
                 var infowindow = new google.maps.InfoWindow({content: content});
 
                 google.maps.event.addListener(marker, "click", function() {
-                    infowindow.open(map,marker);
+                    infowindow.open(map,policemarker);
                 }); 
-                if (marker) {
-                    marker.addListener('click', function() {
+                if (policemarker) {
+                	policemarker.addListener('click', function() {
                         
                         //중심 위치를 클릭된 마커의 위치로 변경
                         map.setCenter(this.getPosition());
@@ -228,27 +251,31 @@ function initMap() {
         contentType: 'application/json;charset=utf-8',
         success : function(data){ //DB접근 후 가져온 데이터
             $.each(data, function(index,item){
-         	    var marker = {  lat: item.lat*=1, lng: item.lit*=1 }; // 그냥받으면 문자열이기때문에 형변환
+         	    var subwaymarker = {  lat: item.lat*=1, lng: item.lit*=1 }; // 그냥받으면 문자열이기때문에 형변환
          	    
-                marker = new google.maps.Marker({
+         	   subwaymarker = new google.maps.Marker({
                 	  icon:
                 	   {
                 		   url: "http://maps.google.com/mapfiles/ms/micons/subway.png"
                 	   },
-                       position: marker, // 마커가 위치할 위도와 경도(변수)
+                       position: subwaymarker, // 마커가 위치할 위도와 경도(변수)
                        map: map,
+                       animation: google.maps.Animation.DROP,
                       
                        title: '검색 결과' // 마커에 마우스 포인트를 갖다댔을 때 뜨는 타이틀
                 });
+         	    
+         	    
+         	    
                 var content = "역 명 : "+item.name+"역"; // 말풍선 안에 들어갈 내용
                 // 마커를 클릭했을 때의 이벤트. 말풍선 뿅~
                 var infowindow = new google.maps.InfoWindow({content: content});
 
-                google.maps.event.addListener(marker, "click", function() {
-                    infowindow.open(map,marker);
+                google.maps.event.addListener(subwaymarker, "click", function() {
+                    infowindow.open(map,subwaymarker);
                 }); 
-                if (marker) {
-                    marker.addListener('click', function() {
+                if (subwaymarker) {
+                	subwaymarker.addListener('click', function() {
                         
                         //중심 위치를 클릭된 마커의 위치로 변경
                         map.setCenter(this.getPosition());
@@ -265,7 +292,8 @@ function initMap() {
     	position: { lat: ${house.lat}, lng: ${house.lng} },
     	//label : "${house.aptName}",
     	map: map,
-    	icon: { url: "http://maps.google.com/mapfiles/kml/pal3/icon56.png"}
+    	icon: { url: "http://maps.google.com/mapfiles/kml/pal3/icon56.png"},
+    	animation: google.maps.Animation.BOUNCE
     });
     
 }
@@ -277,7 +305,6 @@ function initMap() {
             })
         });
 */
-
 
 
     </script>
@@ -337,6 +364,7 @@ function initMap() {
 											거래금액: ${house.dealAmount}<br> 면적: ${house.area }<br>
 											등록일 : ${house.dealYear }.${house.dealMonth }.${house.dealDay }<br>
 
+
 										</td>
 									</tr>
 								</c:forEach>
@@ -365,21 +393,21 @@ function initMap() {
 					<nav>
 						<ul class="nav nav-tabs" id="myTab" role="tablist">
 
-							<li class="nav-item" role="presentation">
-								<a class="btn btn-outline-primary" href="#marketplace" data-toggle="tab">주변상권보기</a>
-							</li>&nbsp
-							<li class="nav-item" role="presentation">
-								<a class="btn btn-outline-success" href="#busstopplace" data-toggle="tab">주변버정보기</a>
-							</li>&nbsp
-							<li class="nav-item" role="presentation">
-								<a class="btn btn-outline-warning" href="#parkplace" data-toggle="tab">주변공원보기</a>
-							</li>&nbsp
-							<li class="nav-item" role="presentation">
-								<a class="btn btn-outline-danger" href="#subwayplace" data-toggle="tab">주변쟈철역보기</a>
-							</li>&nbsp
-							<li class="nav-item" role="presentation">
-								<a class="btn btn-outline-dark" href="#policeplace" data-toggle="tab">주변경찰서보기</a>
-							</li>
+							<li class="nav-item" role="presentation"><a
+								class="btn btn-outline-primary" href="#marketplace"
+								data-toggle="tab">주변상권보기</a></li>&nbsp
+							<li class="nav-item" role="presentation"><a
+								class="btn btn-outline-success" href="#busstopplace"
+								data-toggle="tab">주변버정보기</a></li>&nbsp
+							<li class="nav-item" role="presentation"><a
+								class="btn btn-outline-warning" href="#parkplace"
+								data-toggle="tab">주변공원보기</a></li>&nbsp
+							<li class="nav-item" role="presentation"><a
+								class="btn btn-outline-danger" href="#subwayplace"
+								data-toggle="tab">주변쟈철역보기</a></li>&nbsp
+							<li class="nav-item" role="presentation"><a
+								class="btn btn-outline-dark" href="#policeplace"
+								data-toggle="tab">주변경찰서보기</a></li>
 						</ul>
 					</nav>
 					<br>
@@ -389,7 +417,7 @@ function initMap() {
 							<c:if test="${marketlist ne null }">
 								<h6>- 주변에 이런 곳들이 있어요</h6>
 								<img src="http://maps.google.com/mapfiles/kml/pal2/icon32.png">상권
-						<table class="table table-hover">
+						<table class="table table-hover" id="marketlist">
 									<thead>
 										<tr>
 											<th>가게 이름</th>
@@ -410,6 +438,7 @@ function initMap() {
 							<c:if test="${marketlist eq null }">
 					주변에 상권이 없어요
 					</c:if>
+							<div id="pagination"></div>
 						</div>
 
 						<div class="tab-pane fade" id="busstopplace" role="tabpanel"
@@ -521,7 +550,9 @@ function initMap() {
 						</div>
 					</div>
 					<div class="col-sm-1"></div>
+
 				</div>
+				<div id="chart_div"></div>
 				<!--  
 			<div class="tab-content">
 				<div class="tab-pane container active" href="#marketplace">

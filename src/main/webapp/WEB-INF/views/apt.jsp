@@ -138,7 +138,7 @@ pageContext.setAttribute("root", root);
 				</div>
 				
 				<div class="col-md-6">
-				<input type="hidden" name="pg" id="pg" value="1">
+				
 					<table class="table table-hover">
 						<h4>거래 정보</h4>
 						<tbody>
