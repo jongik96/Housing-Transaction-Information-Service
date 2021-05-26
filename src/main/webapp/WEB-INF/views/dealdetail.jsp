@@ -79,39 +79,39 @@
 
 					<tbody>
 					<c:if test="${house ne null }">
-						<tr class="table-primary">
+						<tr>
 							<td>거래번호</td>
 							<td>${house.no}</td>
 						</tr>
-						<tr class="table-success">
+						<tr>
 							<td>법정동</td>
 							<td>${house.dong}</td>
 						</tr>
-						<tr class="table-info">
+						<tr>
 							<td>아파트명</td>
 							<td>${house.aptName}</td>
 						</tr>
-						<tr class="table-warning">
+						<tr>
 							<td>거래량</td>
 							<td>${house.dealAmount}</td>
 						</tr>
-						<tr class="table-primary">
+						<tr>
 							<td>건축년도</td>
 							<td>${house.buildYear}년</td>
 						</tr>
-						<tr class="table-success">
+						<tr>
 							<td>거래일</td>
 							<td>${house.dealYear}년 ${house.dealMonth }월 ${house.dealDay }일</td>
 						</tr>
-						<tr class="table-info">
+						<tr>
 							<td>면적</td>
 							<td>${house.area}</td>
 						</tr>
-						<tr class="table-warning">
+						<tr>
 							<td>층수</td>
 							<td>${house.floor}</td>
 						</tr>
-						<tr class="table-primary">
+						<tr>
 							<td>주소지</td>
 							<td>${house.jibun}</td>
 						</tr>

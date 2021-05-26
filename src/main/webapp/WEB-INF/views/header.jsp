@@ -56,6 +56,12 @@
 				let aptname = $("#myInput").val();
 				location.href = "${root}/search/aptSearch?aptname="+aptname;
 			});
+		      $("#sendMessageButton").click(function() {
+	                $("#contactForm").attr("action", "${root}/user/regist").submit();
+	            });
+		      $("#usermodify").click(function() {
+                  $("#sendForm").attr("action", "${root}/user/modify").submit();
+          });
 		});
 		  function search(){
 			   var form = document.getElementById("frm");
@@ -108,7 +114,7 @@
                     	</c:if>
                     </ul>
                     
-							<input class="form-control form-control-lg" id="myInput" name = "searchbyapt" type="text" placeholder="Search.." style="width: 500px">
+							<input class="form-control form-control-lg" id="myInput" name = "searchbyapt" type="text" value="${aptname }" placeholder="Search.." style="width: 500px">
 							<button  class="btn btn-primary btn-outline-link font-weight-bolder	" id = "searchbyapt" type = "submit" >검색</button>						
                 </div>
             </div>

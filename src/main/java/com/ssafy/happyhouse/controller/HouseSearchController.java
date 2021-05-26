@@ -49,7 +49,7 @@ public class HouseSearchController {
 
 			if(hlist.size() <=0) hlist = null;
 			if(list.size() <=0) list = null;
-
+			model.addAttribute("aptname",aptname);
 			model.addAttribute("hlist", hlist);
 			model.addAttribute("aptlist", list);
 			model.addAttribute("apt", aptname);

@@ -37,6 +37,7 @@ pageContext.setAttribute("root", root);
         	}
         	
         </style>
+        
     </head>
     <body id="page-top">
         <!-- Navigation-->
@@ -100,7 +101,7 @@ pageContext.setAttribute("root", root);
                             </div>
                             <br />
                             <div id="success"></div>
-                            <div class="form-group"><button type="submit" class="btn btn-primary btn-xl" id="modify-btn">Modify</button></div>
+                            <div class="form-group"><button type="submit" class="btn btn-primary btn-xl" id="usermodify">Modify</button></div>
                         </form>
                     </div>
                 </div>

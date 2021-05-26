@@ -99,13 +99,7 @@ pageContext.setAttribute("root", root);
                                     <p class="help-block text-danger"></p>
                                 </div>
                             </div>
-                            <div class="control-group">
-                                <div class="form-group floating-label-form-group controls mb-0 pb-2">
-                                    <label>Phone Number</label>
-                                    <input class="form-control" id="phone" name="phone" type="tel" placeholder="Phone Number" required="required" data-validation-required-message="Please enter your phone number." />
-                                    <p class="help-block text-danger"></p>
-                                </div>
-                            </div>
+                           
                             <br />
                             <div id="success"></div>
                             <div class="form-group"><button class="btn btn-primary btn-xl" id="sendMessageButton" type="submit">Register</button></div>
