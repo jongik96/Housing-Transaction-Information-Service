@@ -80,14 +80,15 @@ public class HouseSearchController {
 			selected.setDong(map.get("dong"));
 			System.out.println(selected.getDong());
 			
+			
+			
+			
 			AddressDto address = addressService.getBaseAddress(selected);
 			model.addAttribute("address", address);
 			
 			//apt.jsp에 띄우는 리스트
 			List<houseInfoDto> hlist = houseDealService.getHouseByRange(address);
-			
 			if(hlist.size()<=0) hlist = null;
-			
 			model.addAttribute("hlist", hlist);
 			
 			return "apt";
