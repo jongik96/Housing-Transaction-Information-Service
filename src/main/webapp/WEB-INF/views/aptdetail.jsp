@@ -26,54 +26,24 @@
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="${root }/css/styles.css" rel="stylesheet" />
 <link href="${root }/css/custom.css" rel="stylesheet" />
-<script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFhvndwTb7zd3egLZQsUDFAIaDJtZLhjo&callback=initMap&libraries=&v=weekly"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script defer
+	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFhvndwTb7zd3egLZQsUDFAIaDJtZLhjo&callback=initMap&libraries=&v=weekly"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-    
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+
 <script type="text/javascript" src="${root }/main.js"></script>
 <script type="text/javascript" src="${root }/area.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 <style>
 #map {
 	height: 500px;
 	margin-bottom: 10px;
 }
 </style>
-<script type="text/javascript">
-        
-        //로그인 기능 연결
-		$(document).ready(function() {
-			$("#btn-login").click(function() {
-				if($("#loginId").val() == "") {
-					alert("아이디 입력!!!");
-					return;
-				} else if($("#loginPwd").val() == "") {
-					alert("비밀번호 입력!!!");
-					return;
-				} else {
-					$("#loginform").attr("action", "${root}/user/login").submit();
-				}
-			});
-			
-			//로그아웃 기능 연결
-			$('#logout').click(function(){
-			    alert('로그아웃되었습니다.');
-			    location.href = "${root}/user/logout";
-			})
-			
-			//회원정보삭제 기능 연결
-			$("#delete-btn").click(function() {			
-				let userid="<c:out value='${userinfo.userid}'/>";
-				location.href = "${root}/user/deleteMember?userid="+userid;
-			})
-					
-			$("#searchbyapt").click(function() {
-				let aptname = $("#myInput").val();
-				location.href = "${root}/search/aptSearch?aptname="+aptname;
-			});
-		});
-		</script>
 <script>
 
 function initMap() {
@@ -299,13 +269,16 @@ function initMap() {
     });
     
 }
-
+/*
         $(function(){
             $('ul.nav-tabs a').click(function (e) {
               e.preventDefault()
-              $(this).tab('show')
+              $(this).tab('show');
             })
-        })
+        });
+*/
+
+
 
     </script>
 
@@ -314,60 +287,7 @@ function initMap() {
 
 <body id="page-top">
 	<!-- Navigation-->
-	<nav
-		class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top"
-		id="mainNav">
-		<div class="container">
-			<div class="dropdown">
-				<button type="button" class="btn btn-primary dropdown-toggle mr-3"
-					data-toggle="dropdown">More</button>
-				<div class="dropdown-menu">
-					<h3 class="dropdown-header">Lists</h3>
-					<a class="dropdown-item" href="${root}/mvnotice">공지사항</a> <a
-						class="dropdown-item" href="#" id="todaynews">오늘의 뉴스</a> <a
-						class="dropdown-item" href="#" id="search">주변 탐방</a> <a
-						class="dropdown-item"
-						href="${root }/interest/list?userid=${userinfo.userid}">관심 지역
-						둘러보기</a>
-				</div>
-			</div>
-
-
-			<a class="navbar-brand js-scroll-trigger" href="${root }/">Happy
-				House</a>
-			<button
-				class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded"
-				type="button" data-toggle="collapse" data-target="#navbarResponsive"
-				aria-controls="navbarResponsive" aria-expanded="false"
-				aria-label="Toggle navigation">
-				Menu <i class="fas fa-bars"></i>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarResponsive">
-				<ul class="navbar-nav ml-auto">
-					<c:if test="${ userinfo eq null }">
-						<li class="nav-item mx-0 mx-lg-1" id="signupli"><a
-							class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
-							id="signup" href="${root}/user/mvsignup">Sign up</a></li>
-						<li class="nav-item mx-0 mx-lg-1" id="signinli"><a
-							class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
-							data-toggle="modal" data-target="#loginModal">Sign in</a></li>
-					</c:if>
-					<c:if test="${ userinfo ne null }">
-						<li class="nav-item mx-0 mx-lg-1" id="logoutli"><a
-							class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
-							id="logout">Logout</a></li>
-						<li class="nav-item mx-0 mx-lg-1" id="userinfoli"><a
-							class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
-							data-toggle="modal" data-target="#infoModal">UserInfo</a></li>
-					</c:if>
-				</ul>
-
-				<input class="form-control" id="myInput" name="searchbyapt"
-					type="text" placeholder="Search.." style="width: 500px">
-				<button class="btn btn-warning" id="searchbyapt" type="submit">검색</button>
-			</div>
-		</div>
-	</nav>
+	<jsp:include page="header.jsp"></jsp:include>
 	<!-- Masthead-->
 	<header class="masthead bg-primary text-white text-center">
 		<div class="container d-flex align-items-center flex-column">
@@ -406,16 +326,17 @@ function initMap() {
 					<div id="map" style="width: 100%; height: 700px; margin: auto;"></div>
 				</div>
 				<div class="col-md-5">
-				<table class="table table-hover">
+					<table class="table table-hover">
 						<h4>거래 정보</h4>
 						<tbody>
 							<c:if test="${houselist ne null }">
 								<c:forEach var="house" items="${houselist}">
 									<tr>
-										<td>이름 : <a href="${root}/search/mvdealdetail/${house.no}">${house.aptName}</a><br>
+										<td>이름 : <a
+											href="${root}/search/mvdealdetail/${house.no}">${house.aptName}</a><br>
 											거래금액: ${house.dealAmount}<br> 면적: ${house.area }<br>
 											등록일 : ${house.dealYear }.${house.dealMonth }.${house.dealDay }<br>
-										
+
 										</td>
 									</tr>
 								</c:forEach>
@@ -423,9 +344,9 @@ function initMap() {
 							<c:if test="${aptlist ne null }">
 								<c:forEach var="house" items="${aptlist}">
 									<tr>
-										<td>이름 :<a href="${root}/search/mvdealdetail/${house.no}"> ${house.aptName}</a><br> 거래금액:
-											${house.dealAmount}<br> 면적: ${house.area }<br> 등록일
-											: ${house.dealYear }.${house.dealMonth }.${house.dealDay }
+										<td>이름 :<a href="${root}/search/mvdealdetail/${house.no}">
+												${house.aptName}</a><br> 거래금액: ${house.dealAmount}<br>
+											면적: ${house.area }<br> 등록일 : ${house.dealYear }.${house.dealMonth }.${house.dealDay }
 										</td>
 									</tr>
 								</c:forEach>
@@ -437,147 +358,171 @@ function initMap() {
 					</table>
 				</div>
 			</div>
-			
+
 			<div class="row mb-5">
 				<div class="col-sm-1"></div>
 				<div class="col-sm-10">
-				<nav>
-				<ul class="nav  nav-tabs">
-                    <li class="nav-item"><a href="#marketplace"> 주변 상권 정보 | </a><button onclick="onDisplayMarket()">보기</button></li>
-                    <li class="nav-item"><a href="#busstopplace">주변 버스정류장 | </a><button onclick="onDisplayBus()">보기</button></li>
-                    <li class="nav-item"><a href="#parkplace">주변 공원 | </a><button onclick="onDisplayPark()">보기</button></li>
-                    <li class="nav-item"><a href="#policestation">주변 경찰서 | </a><button onclick="onDisplayPolice()">보기</button></li>
-                    <li class="nav-item"><a href="#subwaystation">주변 지하철역</a><button onclick="onDisplaySubway()">보기</button></li>
-                </ul>
-                </nav>
-                <br>
-                <div class="tab-content">
-					<div class="tab-pane active" id="marketplace">
-					<c:if test="${marketlist ne null }">
-						<h6>- 주변에 이런 곳들이 있어요</h6><img src="http://maps.google.com/mapfiles/kml/pal2/icon32.png">상권
+					<nav>
+						<ul class="nav nav-tabs" id="myTab" role="tablist">
+
+							<li class="nav-item" role="presentation">
+								<a class="btn btn-outline-primary" href="#marketplace" data-toggle="tab">주변상권보기</a>
+							</li>&nbsp
+							<li class="nav-item" role="presentation">
+								<a class="btn btn-outline-success" href="#busstopplace" data-toggle="tab">주변버정보기</a>
+							</li>&nbsp
+							<li class="nav-item" role="presentation">
+								<a class="btn btn-outline-warning" href="#parkplace" data-toggle="tab">주변공원보기</a>
+							</li>&nbsp
+							<li class="nav-item" role="presentation">
+								<a class="btn btn-outline-danger" href="#subwayplace" data-toggle="tab">주변쟈철역보기</a>
+							</li>&nbsp
+							<li class="nav-item" role="presentation">
+								<a class="btn btn-outline-dark" href="#policeplace" data-toggle="tab">주변경찰서보기</a>
+							</li>
+						</ul>
+					</nav>
+					<br>
+					<div class="tab-content">
+						<div class="tab-pane fade in active" id="marketplace"
+							role="tabpanel" aria-labelledby="market-tab">
+							<c:if test="${marketlist ne null }">
+								<h6>- 주변에 이런 곳들이 있어요</h6>
+								<img src="http://maps.google.com/mapfiles/kml/pal2/icon32.png">상권
 						<table class="table table-hover">
-							<thead>
-								<tr>
-									<th>가게 이름</th>
-									<th>소분류</th>
-								</tr>
-							</thead>
-							<tbody>
-								<c:forEach var="market" items="${marketlist}">
-									<tr>
-										<td><a href="${root}/search/mvstoredetail/${market.mname}">${market.mname}</a></td>
-										<td>${market.type_lit}</td>
-									</tr>
-								</c:forEach>
-							</tbody>
-						</table>
-					</c:if>
-					<c:if test="${marketlist eq null }">
+									<thead>
+										<tr>
+											<th>가게 이름</th>
+											<th>소분류</th>
+										</tr>
+									</thead>
+									<tbody>
+										<c:forEach var="market" items="${marketlist}">
+											<tr>
+												<td><a
+													href="${root}/search/mvstoredetail/${market.mname}">${market.mname}</a></td>
+												<td>${market.type_lit}</td>
+											</tr>
+										</c:forEach>
+									</tbody>
+								</table>
+							</c:if>
+							<c:if test="${marketlist eq null }">
 					주변에 상권이 없어요
 					</c:if>
-					</div>
-					
-                	<div class="tab-pane fade" id="busstopplace">
-					<c:if test="${busstoplist ne null }">
-						<h6>- 근처에 버스정류장이 있어요</h6><img src="http://maps.google.com/mapfiles/kml/pal4/icon54.png">버스정류장
+						</div>
+
+						<div class="tab-pane fade" id="busstopplace" role="tabpanel"
+							aria-labelledby="busstop-tab">
+							<c:if test="${busstoplist ne null }">
+								<h6>- 근처에 버스정류장이 있어요</h6>
+								<img src="http://maps.google.com/mapfiles/kml/pal4/icon54.png">버스정류장
 						<table class="table table-hover">
-							<thead>
-								<tr>
-									<th>버정 이름</th>
-								</tr>
-							</thead>
-							<tbody>
-								<c:forEach var="busstop" items="${busstoplist}">
-									<tr>
-										<td>${busstop.busstop_name}</td>
-									</tr>
-								</c:forEach>
-							</tbody>
-						</table>
-					</c:if>
-					<c:if test="${busstoplist eq null }">
+									<thead>
+										<tr>
+											<th>버정 이름</th>
+										</tr>
+									</thead>
+									<tbody>
+										<c:forEach var="busstop" items="${busstoplist}">
+											<tr>
+												<td>${busstop.busstop_name}</td>
+											</tr>
+										</c:forEach>
+									</tbody>
+								</table>
+							</c:if>
+							<c:if test="${busstoplist eq null }">
 					주변에 버정 없어요
 					</c:if>
-					</div>
-					
-					<div class="tab-pane fade" id="parkplace">
-					<c:if test="${parklist ne null }">
-						<h6>- 근처에 공원이 있어요</h6><img src="http://maps.google.com/mapfiles/kml/pal2/icon4.png">공원
+						</div>
+
+						<div class="tab-pane fade" id="parkplace" role="tabpanel"
+							aria-labelledby="park-tab">
+							<c:if test="${parklist ne null }">
+								<h6>- 근처에 공원이 있어요</h6>
+								<img src="http://maps.google.com/mapfiles/kml/pal2/icon4.png">공원
 						<table class="table table-hover">
-							<thead>
-								<tr>
-									<th>공원 이름</th>
-									<th>분류</th>
-								</tr>
-							</thead>
-							<tbody>
-								<c:forEach var="park" items="${parklist}">
-									<tr>
-										<td><a href="${root}/search/mvparkdetail/${park.parkname}">${park.parkname}</a></td>
-										<td>${park.parkdiv}</td>
-									</tr>
-								</c:forEach>
-							</tbody>
-						</table>
-					</c:if>
-					<c:if test="${parklist eq null }">
+									<thead>
+										<tr>
+											<th>공원 이름</th>
+											<th>분류</th>
+										</tr>
+									</thead>
+									<tbody>
+										<c:forEach var="park" items="${parklist}">
+											<tr>
+												<td><a
+													href="${root}/search/mvparkdetail/${park.parkname}">${park.parkname}</a></td>
+												<td>${park.parkdiv}</td>
+											</tr>
+										</c:forEach>
+									</tbody>
+								</table>
+							</c:if>
+							<c:if test="${parklist eq null }">
 					주변에 공원이 없어요
 					</c:if>
-					</div>
-					
-					<div class="tab-pane fade" id="policestation">
-					<c:if test="${policelist ne null }">
-						<h6>- 근처에 경찰서가 있어요</h6><img src="http://maps.google.com/mapfiles/kml/pal2/icon8.png">경찰서
+						</div>
+
+						<div class="tab-pane fade" id="policeplace" role="tabpanel"
+							aria-labelledby="police-tab">
+							<c:if test="${policelist ne null }">
+								<h6>- 근처에 경찰서가 있어요</h6>
+								<img src="http://maps.google.com/mapfiles/kml/pal2/icon8.png">경찰서
 						<table class="table table-hover">
-							<thead>
-								<tr>
-									<th>경찰서 이름</th>
-								</tr>
-							</thead>
-							<tbody>
-								<c:forEach var="police" items="${policelist}">
-									<tr>
-										<td>${police.police_name}</td>
-									</tr>
-								</c:forEach>
-							</tbody>
-						</table>
-					</c:if>
-					<c:if test="${policelist eq null }">
+									<thead>
+										<tr>
+											<th>경찰서 이름</th>
+										</tr>
+									</thead>
+									<tbody>
+										<c:forEach var="police" items="${policelist}">
+											<tr>
+												<td>${police.police_name}</td>
+											</tr>
+										</c:forEach>
+									</tbody>
+								</table>
+							</c:if>
+							<c:if test="${policelist eq null }">
 					주변에 경찰서 없어요
-					</c:if>									
-					</div>
-					
-					<div class="tab-pane fade" id="subwaystation">
-					<c:if test="${subwaylist ne null }">
-						<h6>- 근처에 지하철역이 있어요</h6><img src="http://maps.google.com/mapfiles/ms/micons/subway.png">지하철역
-						<table class="table table-hover">
-							<thead>
-								<tr>
-									<th>지하철역 이름</th>
-									<th>호선</th>
-									<th>역 분류</th>
-								</tr>
-							</thead>
-							<tbody>
-								<c:forEach var="subway" items="${subwaylist}">
-									<tr>
-										<td><a href="${root}/search/mvsubwaydetail/${subway.name}">${subway.name}</a></td>
-										<td>${subway.route_name}</td>
-										<td>${subway.transfer}</td>
-									</tr>
-								</c:forEach>
-							</tbody>
-						</table>
 					</c:if>
-					<c:if test="${subwaylist eq null }">
+						</div>
+
+						<div class="tab-pane fade" id="subwayplace" role="tabpanel"
+							aria-labelledby="subway-tab">
+							<c:if test="${subwaylist ne null }">
+								<h6>- 근처에 지하철역이 있어요</h6>
+								<img src="http://maps.google.com/mapfiles/ms/micons/subway.png">지하철역
+						<table class="table table-hover">
+									<thead>
+										<tr>
+											<th>지하철역 이름</th>
+											<th>호선</th>
+											<th>역 분류</th>
+										</tr>
+									</thead>
+									<tbody>
+										<c:forEach var="subway" items="${subwaylist}">
+											<tr>
+												<td><a
+													href="${root}/search/mvsubwaydetail/${subway.name}">${subway.name}</a></td>
+												<td>${subway.route_name}</td>
+												<td>${subway.transfer}</td>
+											</tr>
+										</c:forEach>
+									</tbody>
+								</table>
+							</c:if>
+							<c:if test="${subwaylist eq null }">
 					주변에 지하철 없어요
-					</c:if>										
+					</c:if>
+						</div>
 					</div>
+					<div class="col-sm-1"></div>
 				</div>
-				<div class="col-sm-1"></div>
-			</div>
-<!--  
+				<!--  
 			<div class="tab-content">
 				<div class="tab-pane container active" href="#marketplace">
 					<c:if test="${marketlist ne null }">
@@ -603,7 +548,7 @@ function initMap() {
 					주변에 상권이 없어요
 					</c:if>
 				</div>
-				-->				
+				-->
 			</div>
 		</div>
 	</section>
@@ -612,17 +557,6 @@ function initMap() {
 
 	<!-- Footer-->
 	<jsp:include page="footer.jsp"></jsp:include>
-	<!-- Copyright Section-->
-	<div class="copyright py-4 text-center text-white">
-		<div class="container">
-			<small>Copyright © SSAFY. All rights reserved.</small>
-		</div>
-	</div>
-	<!-- Scroll to Top Button (Only visible on small and extra-small screen sizes)-->
-	<div class="scroll-to-top d-lg-none position-fixed">
-		<a class="js-scroll-trigger d-block text-center text-white rounded"
-			href="#page-top"><i class="fa fa-chevron-up"></i></a>
-	</div>
 	<!-- Portfolio Modals-->
 	<!-- Portfolio Modal 1-->
 	<div class="portfolio-modal modal fade" id="portfolioModal1"
@@ -663,107 +597,6 @@ function initMap() {
 			</div>
 		</div>
 	</div>
-	<!-- The Modal -->
-	<!-- The Modal -->
-	<div class="modal" id="loginModal">
-		<div class="modal-dialog">
-			<div class="modal-content">
 
-				<!-- Modal Header -->
-				<div class="modal-header">
-					<h4 class="modal-title">Login</h4>
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-				</div>
-
-				<!-- Modal body -->
-				<div class="modal-body">
-					<form method="post" id="loginform" action="">
-						<div class="form-group">
-							<label for="loginId">ID:</label> <input type="text"
-								class="form-control" placeholder="Enter ID" id="userid"
-								name="userid">
-						</div>
-						<div class="form-group">
-							<label for="loginPwd">Password:</label> <input type="password"
-								class="form-control" placeholder="Enter password" id="userpwd"
-								name="userpwd">
-						</div>
-
-
-						<!-- Modal footer -->
-						<div class="modal-footer">
-							<button type="button" class="btn btn-primary" id="btn-login">LogIn</button>
-							<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-						</div>
-					</form>
-				</div>
-
-			</div>
-		</div>
-	</div>
-
-	<div class="modal fade" id="infoModal" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel" style="color: black">회원
-						정보 확인</h5>
-
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-
-				<div class="modal-body">
-					<h1 style="color: black">회원 정보 확인</h1>
-					<table class="table table-hover">
-						<tbody>
-							<tr>
-								<td>아이디 :</td>
-								<td>${ userinfo.userid }</td>
-							</tr>
-							<tr>
-								<td>비밀번호 :</td>
-								<td>${ userinfo.userpwd }</td>
-							</tr>
-							<tr>
-								<td>이름 :</td>
-								<td>${ userinfo.username }</td>
-							</tr>
-							<tr>
-								<td>e-mail :</td>
-								<td>${ userinfo.email }</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary"
-						data-dismiss="modal">확인</button>
-					<button type="button" class="btn btn-primary" id="modify-btn"
-						onclick="location.href='${root}/user/usermodify'">수정</button>
-					<button type="button" class="btn btn-danger" id="delete-btn">회원
-						탈퇴</button>
-				</div>
-			</div>
-		</div>
-	</div>
-
-
-	<!-- Bootstrap core JS-->
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
-	<!-- Third party plugin JS-->
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
-	<!-- Contact form JS-->
-	<script src="assets/mail/jqBootstrapValidation.js"></script>
-	<script src="assets/mail/contact_me.js"></script>
-	<!-- Core theme JS-->
-	<script src="js/scripts.js"></script>
 </body>
 </html>

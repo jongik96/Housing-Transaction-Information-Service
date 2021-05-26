@@ -1,12 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<c:set var="root" value="${pageContext.request.contextPath }"/>
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Happy House</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
         <!-- Font Awesome icons (free version)-->
         <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" crossorigin="anonymous"></script>
         <!-- Google fonts-->
@@ -17,10 +23,9 @@
         <link href="${root }/css/custom.css" rel="stylesheet" />
         <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFhvndwTb7zd3egLZQsUDFAIaDJtZLhjo&callback=initMap&libraries=&v=weekly"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script type="text/javascript">
-        
+        <script type="text/javascript">
         //로그인 기능 연결
-				$(document).ready(function() {
+		$(document).ready(function() {
 			$("#btn-login").click(function() {
 				if($("#loginId").val() == "") {
 					alert("아이디 입력!!!");
@@ -52,104 +57,27 @@
 				location.href = "${root}/search/aptSearch?aptname="+aptname;
 			});
 		});
-		
-		
-		$(function(){
-		     
-		   //군구 리스트 받기
-		$("#city").change(function(){
-			let si = $('#city').val();
-		$.ajax({
-			url:'${root}/address/gugun/' + si,  
-			type:'GET',
-			contentType:'application/json;charset=utf-8',
-			dataType:'json',
-			success:function(address) {
-				var list= "<option value=all >시/군</option>";
-	            $("#gu").empty();
-	            $.each(address, function(index,item){
-	                list+= "<option value=" +item.gugun+" >"+item.gugun+"</option>";
-	            });
-	            $("#gu").append(list);
-			},
-			error:function(xhr,status,msg){
-				console.log("상태값 : " + status + " Http에러메시지 : "+msg);
-			},
-			statusCode: {
-				500: function() {
-					alert("서버에러.");
-					// location.href = "/error/e500";
-				},
-				404: function() {
-					alert("페이지없다.");
-					// location.href = "/error/e404";
-				}
-			}	
-		});
-		})
-		
-		
-		//동 리스트 받기
-		$("#gu").change(function(){
-			let gugun = $('#gu').val();
-		$.ajax({
-			url:'${root}/address/dong/' + gugun,  
-			type:'GET',
-			contentType:'application/json;charset=utf-8',
-			dataType:'json',
-			success:function(address) {
-				var list= "<option value=all >동</option>";
-	            $("#dong").empty();
-	            $.each(address, function(index,item){
-	                list+= "<option value=" +item.dong+" >"+item.dong+"</option>";
-	            });
-	            $("#dong").append(list);
-			},
-			error:function(xhr,status,msg){
-				console.log("상태값 : " + status + " Http에러메시지 : "+msg);
-			},
-			statusCode: {
-				500: function() {
-					alert("서버에러.");
-					// location.href = "/error/e500";
-				},
-				404: function() {
-					alert("페이지없다.");
-					// location.href = "/error/e404";
-				}
-			}	
-		});
-		})
-		
-		})
-		
-		
-        
-   function initMap() {
-       const myLatLng = {  lat: 37.570705, lng: 126.981354};
-       const map = new google.maps.Map(document.getElementById("map"), {
-         zoom: 15,
-         center: myLatLng,
-       });
-     }
-   function search(){
-	   var form = document.getElementById("frm");
-       var dong = form.dong.value;
-       var gugun = form.gu.value;
-       var city = form.city.value;
-       form.act.value = "searchhouse";
-       $("#frm").attr("action", "${root}/search/searchDong").submit();
-   }
-   function interest(){
-	   var form = document.getElementById("frm");
-       var dong = form.dong.value;
-       var gugun = form.gu.value;
-       var city = form.city.value;
-       form.act.value = "registerInterest";
-       $("#frm").attr("action", "${root}/interest/insert").submit();
-   }
-   
-        </script>
+		  function search(){
+			   var form = document.getElementById("frm");
+		       var dong = form.dong.value;
+		       var gugun = form.gu.value;
+		       var city = form.city.value;
+		       form.act.value = "searchhouse";
+		       $("#frm").attr("action", "${root}/search/searchDong").submit();
+		   }
+		   function interest(){
+			   var form = document.getElementById("frm");
+		       var dong = form.dong.value;
+		       var gugun = form.gu.value;
+		       var city = form.city.value;
+		       form.act.value = "registerInterest";
+		       $("#frm").attr("action", "${root}/interest/insert").submit();
+		   }
+		   
+		   
+		   
+		    </script>
+
 </head>
 <body>
 <!-- Navigation-->
@@ -188,10 +116,110 @@
                     	</c:if>
                     </ul>
                     
-							<input class="form-control" id="myInput" name = "searchbyapt" type="text" placeholder="Search.." style="width: 500px">
-							<button  class="btn btn-warning" id = "searchbyapt" type = "submit" >검색</button>						
+							<input class="form-control form-control-lg" id="myInput" name = "searchbyapt" type="text" placeholder="Search.." style="width: 500px">
+							<button  class="btn btn-primary btn-outline-link font-weight-bolder	" id = "searchbyapt" type = "submit" >검색</button>						
                 </div>
             </div>
         </nav>
+        
+       
+        
+          <!-- The Modal -->
+	<div class="modal" id="loginModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<h4 class="modal-title">Login</h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+
+				<!-- Modal body -->
+				<div class="modal-body">
+					<form method="post" id="loginform" action="">
+						<div class="form-group">
+							<label for="loginId">ID:</label>
+							<input type="text" class="form-control" placeholder="Enter ID" id="userid" name="userid">
+						</div>
+						<div class="form-group">
+							<label for="loginPwd">Password:</label>
+							<input type="password" class="form-control" placeholder="Enter password" id="userpwd" name="userpwd">
+						</div>
+						
+						
+						<!-- Modal footer -->
+						<div class="modal-footer">
+							<button type="button" class="btn btn-primary" id="btn-login">LogIn</button>
+							<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+						</div>
+					</form>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	
+<div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel" style="color: black">회원 정보 확인</h5>
+       
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+       
+      <div class="modal-body">
+        <h1 style="color: black">회원 정보 확인</h1>
+        <table class="table table-hover">
+				<tbody>
+					<tr>
+						<td>아이디 : </td>
+						<td>${ userinfo.userid }</td>
+					</tr>
+					<tr>
+						<td>비밀번호 : </td>
+						<td>${ userinfo.userpwd }</td>
+					</tr>
+					<tr>
+						<td>이름 :  </td>
+						<td>${ userinfo.username }</td>
+					</tr>
+					<tr>
+						<td>e-mail : </td>
+						<td>${ userinfo.email }</td>
+					</tr>
+				</tbody>
+			</table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" >확인</button>
+        <button type="button" class="btn btn-primary" id="modify-btn" onclick="location.href='${root}/user/usermodify'" >수정</button>
+        <button type="button" class="btn btn-danger" id="delete-btn">회원 탈퇴</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="toast">
+  <div class="toast-header">
+    회원 탈퇴 확인
+  </div>
+  <div class="toast-body">
+    정말 탈퇴하시겠습니까 ? 
+  </div>
+</div>
+        
+        <!-- Bootstrap core JS-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Third party plugin JS-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+        <!-- Contact form JS-->
+        <script src="assets/mail/jqBootstrapValidation.js"></script>
+        <script src="assets/mail/contact_me.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
 </body>
 </html>
