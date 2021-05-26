@@ -218,6 +218,11 @@ caption {
   caption-side: bottom;
 }
 
+.pagination li:hover
+{
+    cursor: pointer;
+}
+
 th {
   text-align: inherit;
   text-align: -webkit-match-parent;

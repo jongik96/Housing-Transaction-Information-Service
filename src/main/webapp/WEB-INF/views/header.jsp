@@ -64,18 +64,10 @@
 		       var city = form.city.value;
 		       form.act.value = "searchhouse";
 		       $("#frm").attr("action", "${root}/search/searchDong").submit();
+		       
 		   }
-		   function interest(){
-			   var form = document.getElementById("frm");
-		       var dong = form.dong.value;
-		       var gugun = form.gu.value;
-		       var city = form.city.value;
-		       form.act.value = "registerInterest";
-		       $("#frm").attr("action", "${root}/interest/insert").submit();
-		   }
-		   
-		   
-		   
+
+		  
 		    </script>
 
 </head>

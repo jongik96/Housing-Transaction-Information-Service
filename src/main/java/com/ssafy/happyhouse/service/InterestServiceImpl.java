@@ -27,8 +27,8 @@ private static final Logger logger = LoggerFactory.getLogger(InterestServiceImpl
 	}
 
 	@Override
-	public void deleteInterest(String userid, String dong) {
-		sqlSession.getMapper(InterestRepo.class).deleteInterest(userid,dong);
+	public void deleteInterest(String userid, int no) {
+		sqlSession.getMapper(InterestRepo.class).deleteInterest(userid,no);
 	}
 
 	@Override

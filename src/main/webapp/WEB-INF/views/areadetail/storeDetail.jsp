@@ -78,15 +78,15 @@
 
 					<tbody>
 					<c:if test="${store ne null }">
-						<tr class="table-primary">
+						<tr class="">
 							<td>가게이름</td>
 							<td>${store.mname}</td>
 						</tr>
-						<tr class="table-info">
+						<tr class="">
 							<td>업종</td>
 							<td>${store.type_big}</td>
 						</tr>
-						<tr class="table-success">
+						<tr class="">
 							<td>메뉴</td>
 							<td>${store.type_lit}</td>
 						</tr>

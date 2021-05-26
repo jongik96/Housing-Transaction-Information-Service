@@ -74,23 +74,23 @@
 			<div class="col-md-3 text-center"></div>
 			<div class="col-md-6 text-center">
 			<h2><mark>${subway.name}</mark></h2> 
-				<table class="table table-striped table-bordered table-hover">
+				<table class="table table-striped  table-hover">
 
 					<tbody>
 					<c:if test="${subway ne null }">
-						<tr class="table-primary">
+						<tr class="">
 							<td>역 명</td>
 							<td>${subway.name}</td>
 						</tr>
-						<tr class="table-success">
+						<tr class="">
 							<td>호선</td>
 							<td>${subway.route_name}</td>
 						</tr>
-						<tr class="table-info">
+						<tr class="">
 							<td>구분</td>
 							<td>${subway.transfer}</td>
 						</tr>
-						<tr class="table-warning">
+						<tr class="">
 							<td>전화번호</td>
 							<td>${subway.phone}</td>
 						</tr>

@@ -46,9 +46,9 @@ public class InterestController {
 	}
 	
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
-	public String deleteInterest(@Param("userid") String userid,@Param("dong") String dong,Model model) {
+	public String deleteInterest(@Param("userid") String userid,@Param("no") int no,Model model) {
 		try{
-				interestService.deleteInterest(userid,dong);
+				interestService.deleteInterest(userid,no);
 				model.addAttribute("interestlist",interestService.getInterest(userid));
 				return "interestlist";
 			}catch(Exception e) {

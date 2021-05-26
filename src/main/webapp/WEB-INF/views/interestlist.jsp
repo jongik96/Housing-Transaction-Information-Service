@@ -88,7 +88,7 @@ pageContext.setAttribute("root", root);
 											<div class="form-group md-1">
 												${item.city } ${item.gugun } ${item.dong} 
 												<a class="btn btn-primary" href="${root }/search/searchDong?city=${item.city }&gugun=${item.gugun }&dong=${item.dong} ">검색</a>
-												<a class="btn btn-primary" href="${root }/interest/delete?userid=${userinfo.userid }&dong=${item.dong} ">삭제</a>
+												<a class="btn btn-primary" href="${root }/interest/delete?userid=${userinfo.userid }&no=${item.no} ">삭제</a>
 											</div></td>
 									</tr>
 								</c:forEach>
