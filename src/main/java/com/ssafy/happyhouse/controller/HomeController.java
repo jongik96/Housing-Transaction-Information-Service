@@ -32,4 +32,15 @@ public class HomeController {
 		}
 	}
 	
+	@RequestMapping(value="/mvNews", method = RequestMethod.GET)
+	public String mvNews(Model model, HttpSession session) {
+		try {
+			return "News_vue";
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("msg", "페이지 이동중 문제가 발생했습니다.");
+			return "error/error";
+		}
+	}
+	
 }
