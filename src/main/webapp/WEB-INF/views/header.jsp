@@ -90,7 +90,7 @@
   					<div class="dropdown-menu">
   					<h3 class="dropdown-header">Lists</h3>
     				<a class="dropdown-item" href="${root}/mvnotice">공지사항</a>
-					<a class="dropdown-item" href="#" id="todaynews">오늘의 뉴스</a>
+					<a class="dropdown-item" href="${root}/mvNews" id="todaynews">오늘의 뉴스</a>
     			
     				<c:if test="${userinfo ne null}">
     				<a class="dropdown-item" href="${root }/interest/list?userid=${userinfo.userid}">관심 지역 둘러보기</a>
