@@ -73,20 +73,12 @@ public class HouseSearchController {
 			model.addAttribute("dong", map.get("dong"));
 
 			AddressDto selected = new AddressDto();
-			selected.setCity(map.get("city"));
-			System.out.println(selected.getCity());
+			selected.setCity(map.get("city"));;
 			selected.setGugun(map.get("gugun"));
-			System.out.println(selected.getGugun());
-			selected.setDong(map.get("dong"));
-			System.out.println(selected.getDong());
-			
-			
-			
-			
+			selected.setDong(map.get("dong"));		
 			AddressDto address = addressService.getBaseAddress(selected);
 			model.addAttribute("address", address);
 			
-			//apt.jsp에 띄우는 리스트
 			List<houseInfoDto> hlist = houseDealService.getHouseByRange(address);
 			if(hlist.size()<=0) hlist = null;
 			model.addAttribute("hlist", hlist);

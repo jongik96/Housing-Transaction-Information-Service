@@ -36,9 +36,7 @@ public class NaverNewsServiceImpl implements NaverNewsService {
 
 	@Override
 	public List<NewsDto> newsMain() throws IOException {
-		
-		String input = URLEncoder.encode("부동산", "utf-8");
-		
+		String input = URLEncoder.encode("부동산", "utf-8");	
 		String apiURL = "https://openapi.naver.com/v1/search/news.json?query=" + input 
 				+ "&display=5&start=1&sort=date";
 		return getConn(apiURL);
@@ -63,8 +61,6 @@ public class NaverNewsServiceImpl implements NaverNewsService {
 				while((data = br.readLine()) != null) {
 					responseBody.append(data);
 				} br.close();
-				
-				System.out.println(responseBody.toString());
 				JsonParser jsonParser = new JsonParser();
 				JsonObject obj = (JsonObject) jsonParser.parse(responseBody.toString());
 				JsonArray jsonArray = (JsonArray) obj.get("items");
